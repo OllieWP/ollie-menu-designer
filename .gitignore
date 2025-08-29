@@ -50,3 +50,4 @@ Sites
 zip-plugin.sh
 zip
 *.zip
+package-lock.json

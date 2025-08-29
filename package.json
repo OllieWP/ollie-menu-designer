@@ -18,7 +18,7 @@
 		"plugin-zip": "npm run plugin-zip && copyfiles --verbose menu-designer.zip _playground/ && rm menu-designer.zip"
 	},
 	"devDependencies": {
-		"@wordpress/scripts": "^27.2.0",
+		"@wordpress/scripts": "^30.22.0",
 		"copyfiles": "^2.4.1"
 	},
 	"dependencies": {
