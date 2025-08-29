@@ -24,8 +24,8 @@ const CONFIG = {
 		MIN_WIDTH: 200, // px - Minimum width for menus
 		MIN_WIDTH_BEFORE_ANCHOR: 400, // px - Minimum width before switching to anchoring
 		VIEWPORT_OFFSET: 120, // px - Space reserved for modal header
-		MOBILE_BG_OPACITY: 0.75, // Opacity for mobile background color
-		DEFAULT_BG_FALLBACK: 'rgba(255, 255, 255, 0.75)', // Fallback mobile background
+		MOBILE_BG_OPACITY: 1, // Opacity for mobile background color
+		DEFAULT_BG_FALLBACK: 'rgba(255, 255, 255, 1)', // Fallback mobile background
 	},
 
 	// CSS classes

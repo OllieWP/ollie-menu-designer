@@ -87,9 +87,9 @@ const CONFIG = {
     // px - Minimum width before switching to anchoring
     VIEWPORT_OFFSET: 120,
     // px - Space reserved for modal header
-    MOBILE_BG_OPACITY: 0.75,
+    MOBILE_BG_OPACITY: 1,
     // Opacity for mobile background color
-    DEFAULT_BG_FALLBACK: 'rgba(255, 255, 255, 0.75)' // Fallback mobile background
+    DEFAULT_BG_FALLBACK: 'rgba(255, 255, 255, 1)' // Fallback mobile background
   },
   // CSS classes
   CLASSES: {

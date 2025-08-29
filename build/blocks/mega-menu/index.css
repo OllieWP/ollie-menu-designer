@@ -94,12 +94,17 @@
 }
 .wp-block-navigation__responsive-container.is-menu-open .wp-block-ollie-mega-menu__menu-container {
   position: fixed;
-  top: 0;
+  top: 0 !important;
   left: 0 !important;
   width: 100% !important;
-  height: 100%;
+  height: 100% !important;
   z-index: 100;
   opacity: 1;
+  overflow-x: hidden !important;
+  overflow-y: scroll !important;
+}
+.admin-bar .wp-block-navigation__responsive-container.is-menu-open .wp-block-ollie-mega-menu__menu-container {
+  top: 46px !important;
 }
 /*!*******************************************************************************************************************************************************************************************************************************************************!*\
   !*** css ./node_modules/css-loader/dist/cjs.js??ruleSet[1].rules[4].use[1]!./node_modules/postcss-loader/dist/cjs.js??ruleSet[1].rules[4].use[2]!./node_modules/sass-loader/dist/cjs.js??ruleSet[1].rules[4].use[3]!./src/blocks/mega-menu/edit.scss ***!
