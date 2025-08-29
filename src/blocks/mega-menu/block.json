@@ -69,7 +69,7 @@
 		},
 		"__experimentalSlashInserter": true
 	},
-	"textdomain": "menu-designer",
+	"textdomain": "ollie-menu-designer",
 	"editorScript": "file:./index.js",
 	"editorStyle": "file:./index.css",
 	"style": "file:./style-index.css",
