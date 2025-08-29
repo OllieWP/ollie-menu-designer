@@ -20,15 +20,15 @@ function menu_designer_handle_preview() {
 
 	// Check if user can edit theme options
 	if ( ! current_user_can( 'edit_theme_options' ) ) {
-		wp_die( esc_html__( 'You do not have permission to preview menus.', 'ollie-menu-designer' ) );
+		wp_die( esc_html__( 'You do not have permission to preview menus.', 'menu-designer' ) );
 	}
 
 	// Get the template part slug
 	// phpcs:ignore WordPress.Security.NonceVerification.Recommended -- This is a read-only preview operation
 	$menu_slug = sanitize_text_field( wp_unslash( $_GET['menu_designer_preview'] ) );
-	
+
 	if ( empty( $menu_slug ) ) {
-		wp_die( esc_html__( 'No menu specified.', 'ollie-menu-designer' ) );
+		wp_die( esc_html__( 'No menu specified.', 'menu-designer' ) );
 	}
 
 	// Hook to print inline styles for blocks
@@ -42,7 +42,7 @@ function menu_designer_handle_preview() {
 			}
 		}
 	}, 20 );
-	
+
 	// Set up a minimal HTML page for preview
 	?>
 	<!DOCTYPE html>
@@ -70,24 +70,24 @@ function menu_designer_handle_preview() {
 	<body <?php body_class( 'mega-menu-preview' ); ?>>
 		<div class="mega-menu-preview-wrapper">
 			<?php
-			// Get the template part content  
+			// Get the template part content
 			$template_part = get_block_template( get_stylesheet() . '//' . $menu_slug, 'wp_template_part' );
-			
+
 			if ( ! $template_part ) {
-				echo '<p>' . esc_html__( 'Template part not found.', 'ollie-menu-designer' ) . '</p>';
+				echo '<p>' . esc_html__( 'Template part not found.', 'menu-designer' ) . '</p>';
 			} else {
 				// Use the content property which contains the raw block content
 				$content = $template_part->content;
-				
+
 				// Render the blocks - this will process all blocks including inline styles
 				echo do_blocks( $content ); // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped -- Block content is properly escaped by do_blocks
 			}
 			?>
 		</div>
-		<?php 
+		<?php
 		// Print any inline styles that were added during rendering
 		wp_print_styles();
-		wp_footer(); 
+		wp_footer();
 		?>
 	</body>
 	</html>

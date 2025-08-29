@@ -20,13 +20,13 @@ jobs:
           # Get current version from readme.txt
           CURRENT_VERSION=$(grep -Po 'Stable tag: \K(.*)' readme.txt)
           echo "Current version: $CURRENT_VERSION"
-          
+
           # Get previous version from readme.txt in the previous commit
           git checkout HEAD~1 readme.txt
           PREVIOUS_VERSION=$(grep -Po 'Stable tag: \K(.*)' readme.txt || echo "0.0.0")
           git checkout HEAD readme.txt
           echo "Previous version: $PREVIOUS_VERSION"
-          
+
           # Compare versions
           if [ "$CURRENT_VERSION" = "$PREVIOUS_VERSION" ]; then
             echo "Version has not changed. Skipping release."
@@ -57,26 +57,26 @@ jobs:
           # Extract stable tag
           STABLE_TAG=$(grep -Po 'Stable tag: \K(.*)' readme.txt)
           echo "STABLE_TAG=$STABLE_TAG" >> $GITHUB_ENV
-          
+
           # Extract latest changelog entry
           CHANGELOG_TITLE=$(grep -Po '= [0-9.]+ .*=' readme.txt | head -1)
-          
+
           # Get all bullet points under the latest changelog entry
           CHANGELOG_START_LINE=$(grep -n "$CHANGELOG_TITLE" readme.txt | cut -d ':' -f 1)
           NEXT_SECTION_LINE=$(tail -n +$((CHANGELOG_START_LINE+1)) readme.txt | grep -n "=" | head -1 | cut -d ':' -f 1)
-          
+
           if [ -z "$NEXT_SECTION_LINE" ]; then
             # If there's no next section, read until end of changelog section
             NEXT_SECTION_LINE=$(tail -n +$((CHANGELOG_START_LINE+1)) readme.txt | grep -n "==" | head -1 | cut -d ':' -f 1)
           fi
-          
+
           if [ -z "$NEXT_SECTION_LINE" ]; then
             # If still no section found, read next 20 lines
             NEXT_SECTION_LINE=20
           fi
-          
+
           CHANGELOG_CONTENT=$(tail -n +$((CHANGELOG_START_LINE+1)) readme.txt | head -n $((NEXT_SECTION_LINE-1)))
-          
+
           # Format the release notes
           RELEASE_NOTES="${CHANGELOG_TITLE}\n${CHANGELOG_CONTENT}"
           echo "RELEASE_NOTES<<EOF" >> $GITHUB_ENV
@@ -87,7 +87,7 @@ jobs:
         if: env.VERSION_CHANGED == 'true'
         run: |
           # Create the zip file directly, excluding development files
-          zip -r ollie-menu-designer.zip . \
+          zip -r menu-designer.zip . \
               -x "*.git*" \
               -x "*.github*" \
               -x "node_modules/*" \
@@ -111,6 +111,6 @@ jobs:
           body: ${{ env.RELEASE_NOTES }}
           draft: false
           prerelease: false
-          files: ollie-menu-designer.zip
+          files: menu-designer.zip
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}

@@ -7,7 +7,7 @@ import { createInterpolateElement } from '@wordpress/element';
 /**
  * Template Help Text Component
  * Generates help text with links for template creation
- * 
+ *
  * @param {Object} props Component props
  * @param {boolean} props.hasTemplates - Whether templates exist
  * @param {string} props.templateArea - Template area name
@@ -23,9 +23,9 @@ export default function TemplateHelpText( {
 	isCreating = false,
 } ) {
 	if ( hasTemplates ) {
-		return createInterpolateElement( 
+		return createInterpolateElement(
 			sprintf(
-				__( 'Select a menu to use as a dropdown or <create>create a new one</create> in the <editor>Site Editor</editor>.', 'ollie-menu-designer' )
+				__( 'Select a menu to use as a dropdown or <create>create a new one</create> in the <editor>Site Editor</editor>.', 'menu-designer' )
 			),
 			{
 				create: (
@@ -37,7 +37,7 @@ export default function TemplateHelpText( {
 								onCreateClick();
 							}
 						} }
-						style={{ 
+						style={{
 							textDecoration: 'underline',
 							cursor: isCreating ? 'default' : 'pointer',
 							opacity: isCreating ? 0.6 : 1
@@ -55,15 +55,15 @@ export default function TemplateHelpText( {
 			}
 		);
 	}
-	
+
 	// Special case for menu templates
-	const noTemplatesMessage = templateArea === 'menu' 
-		? __( 'No menus found. <a>Create your first menu</a>.', 'ollie-menu-designer' )
+	const noTemplatesMessage = templateArea === 'menu'
+		? __( 'No menus found. <a>Create your first menu</a>.', 'menu-designer' )
 		: sprintf(
-			__( 'No %s templates found. <a>Create your first template</a>.', 'ollie-menu-designer' ),
+			__( 'No %s templates found. <a>Create your first template</a>.', 'menu-designer' ),
 			templateArea
 		);
-		
+
 	return createInterpolateElement(
 		noTemplatesMessage,
 		{
@@ -76,7 +76,7 @@ export default function TemplateHelpText( {
 							onCreateClick();
 						}
 					} }
-					style={{ 
+					style={{
 						textDecoration: 'underline',
 						cursor: isCreating ? 'default' : 'pointer',
 						opacity: isCreating ? 0.6 : 1

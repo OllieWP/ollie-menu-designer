@@ -12,7 +12,7 @@ msgstr ""
 "POT-Creation-Date: 2025-08-29T04:05:10+00:00\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "X-Generator: WP-CLI 2.4.0\n"
-"X-Domain: ollie-menu-designer\n"
+"X-Domain: menu-designer\n"
 
 #. Plugin Name of the plugin
 msgid "Ollie Menu Designer"

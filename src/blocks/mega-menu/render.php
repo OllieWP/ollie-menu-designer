@@ -30,7 +30,7 @@ $button_id = $unique_id . '-button';
 
 // Don't display the dropdown link if there is no label or no menu slug.
 if ( ! $label || ! $menu_slug ) {
-	return null;	
+	return null;
 }
 
 $classes  = $disable_when_collapsed ? 'disable-menu-when-collapsed ' : '';
@@ -59,14 +59,14 @@ $toggle_icon = '<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 12 12" widt
 	data-wp-watch--layout="callbacks.initMenuLayout"
 	data-wp-on-window--resize="actions.handleResize"
 >
-	<?php 
+	<?php
 	// Common attributes for both button and anchor
 	$toggle_content = '<span class="wp-block-navigation-item__label">' . $label . '</span>';
 	if ( $description ) {
 		$toggle_content .= '<span id="' . esc_attr( $unique_id ) . '-desc" class="wp-block-navigation-item__description">' . $description . '</span>';
 	}
 	$toggle_content .= '<span class="wp-block-ollie-mega-menu__toggle-icon" aria-hidden="true">' . $toggle_icon . '</span>';
-	
+
 	$use_link = $show_on_hover && $url;
 	$tag_name = $use_link ? 'a' : 'button';
 	$extra_attrs = $use_link ? 'href="' . esc_url( $url ) . '"' : '';
@@ -102,11 +102,11 @@ $toggle_icon = '<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 12 12" widt
 		aria-labelledby="<?php echo esc_attr( $button_id ); ?>"
 	>
 		<?php echo wp_kses_post( block_template_part( $menu_slug ) ); ?>
-		<button 
-			aria-label="<?php echo esc_attr( __( 'Close menu', 'ollie-menu-designer' ) ); ?>" 
-			class="menu-container__close-button" 
+		<button
+			aria-label="<?php echo esc_attr( __( 'Close menu', 'menu-designer' ) ); ?>"
+			class="menu-container__close-button"
 			data-wp-on--click="actions.closeMenuOnClick"
-			type="button" 
+			type="button"
 		>
 			<?php echo $close_icon; ?>
 		</button>

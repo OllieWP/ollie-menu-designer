@@ -20,7 +20,7 @@ import {
  * Template Preview Modal Component
  * IMPORTANT: This component preserves the critical iframe height measurement
  * and animation logic. Do not modify without testing height adjustments.
- * 
+ *
  * @param {Object} props Component props
  * @param {boolean} props.isOpen - Whether modal is open
  * @param {Function} props.onClose - Close callback
@@ -114,7 +114,7 @@ export default function TemplatePreviewModal( {
 	 */
 	const getModalWidth = () => {
 		const { width, customWidth } = previewOptions;
-		
+
 		switch ( width ) {
 			case 'content':
 				return layout?.contentSize || '650px';
@@ -143,7 +143,7 @@ export default function TemplatePreviewModal( {
 	return (
 		<Modal
 			title={ sprintf(
-				__( 'Menu Preview: %s', 'ollie-menu-designer' ),
+				__( 'Menu Preview: %s', 'menu-designer' ),
 				templateLabel
 			) }
 			onRequestClose={ handleClose }
@@ -171,7 +171,7 @@ export default function TemplatePreviewModal( {
 						transition: 'opacity 0.3s ease',
 						borderRadius: backgroundColor ? '10px' : '0',
 					} }
-					title={ __( 'Template Preview', 'ollie-menu-designer' ) }
+					title={ __( 'Template Preview', 'menu-designer' ) }
 					onLoad={ handleIframeLoad }
 				/>
 			</PreviewContainer>
@@ -215,7 +215,7 @@ function LoadingIndicator() {
 		>
 			<Spinner />
 			<p style={ { marginTop: '10px' } }>
-				{ __( 'Loading preview…', 'ollie-menu-designer' ) }
+				{ __( 'Loading preview…', 'menu-designer' ) }
 			</p>
 		</div>
 	);

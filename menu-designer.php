@@ -8,9 +8,9 @@
  * Author:            Mike McAlister
  * License:           GPL-3.0-or-later
  * License URI:       https://www.gnu.org/licenses/gpl-3.0.html
- * Text Domain:       ollie-menu-designer
+ * Text Domain:       menu-designer
  *
- * @package           ollie-menu-designer
+ * @package           menu-designer
  */
 
 // Exit if accessed directly.
@@ -48,9 +48,9 @@ function menu_designer_template_part_areas( array $areas ) {
 	$areas[] = array(
 		'area'        => 'menu',
 		'area_tag'    => 'div',
-		'description' => __( 'Menu templates are used to create dropdown menus and mobile menus.', 'ollie-menu-designer' ),
+		'description' => __( 'Menu templates are used to create dropdown menus and mobile menus.', 'menu-designer' ),
 		'icon'        => 'layout',
-		'label'       => __( 'Menu', 'ollie-menu-designer' ),
+		'label'       => __( 'Menu', 'menu-designer' ),
 	);
 
 	return $areas;

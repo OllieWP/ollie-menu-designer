@@ -7,7 +7,7 @@ import { useDispatch } from '@wordpress/data';
 
 /**
  * Custom hook for creating template parts
- * 
+ *
  * @param {Object} options Configuration options
  * @param {string} options.templateArea - The template area (e.g., 'menu', 'header', 'footer')
  * @param {string} options.baseSlug - Base slug for the template (e.g., 'mobile-menu', 'dropdown-menu')
@@ -39,10 +39,10 @@ export default function useTemplateCreation( {
 			}
 			return false;
 		} ).length || 0;
-		
+
 		let slug = baseSlug;
 		let displayNumber = existingCount + 1;
-		
+
 		// If this is not the first template, add a number
 		if ( existingCount > 0 ) {
 			// Find the next available slug
@@ -50,17 +50,17 @@ export default function useTemplateCreation( {
 			do {
 				counter++;
 				slug = `${baseSlug}-${counter}`;
-			} while ( existingTemplates?.find( 
+			} while ( existingTemplates?.find(
 				t => t.slug === slug && ( !t.area || t.area === templateArea )
 			) );
 			displayNumber = counter;
 		}
-		
+
 		// Generate the title
-		const title = existingCount > 0 
-			? sprintf( __( '%s %d', 'ollie-menu-designer' ), baseTitle, displayNumber )
+		const title = existingCount > 0
+			? sprintf( __( '%s %d', 'menu-designer' ), baseTitle, displayNumber )
 			: baseTitle;
-			
+
 		return { slug, title };
 	};
 
@@ -69,12 +69,12 @@ export default function useTemplateCreation( {
 	 */
 	const createTemplate = async () => {
 		if ( isCreating ) return;
-		
+
 		setIsCreating( true );
-		
+
 		try {
 			const { slug, title } = generateUniqueSlugAndTitle();
-			
+
 			const newTemplate = await saveEntityRecord( 'postType', 'wp_template_part', {
 				slug: slug,
 				theme: currentTheme || 'theme',
@@ -91,7 +91,7 @@ export default function useTemplateCreation( {
 			if ( newTemplate && newTemplate.id ) {
 				// Call success callback with the new template
 				onSuccess( newTemplate );
-				
+
 				// Small delay to ensure the template is fully saved
 				setTimeout( () => {
 					// Navigate to the new template in the site editor
@@ -103,7 +103,7 @@ export default function useTemplateCreation( {
 			}
 		} catch ( error ) {
 			console.error( 'Error creating template:', error );
-			alert( __( 'Failed to create template. Please try again.', 'ollie-menu-designer' ) );
+			alert( __( 'Failed to create template. Please try again.', 'menu-designer' ) );
 		} finally {
 			setIsCreating( false );
 		}
