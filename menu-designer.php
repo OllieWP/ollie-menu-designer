@@ -3,7 +3,7 @@
  * Plugin Name:       Ollie Menu Designer
  * Description:       Design stunning mobile navigation and dropdown menus in minutes using the native WordPress block editor — no coding required.
  * Requires at least: 6.5
- * Requires PHP:      7.0
+ * Requires PHP:      7.4
  * Version:           0.1.7
  * Author:            Mike McAlister
  * License:           GPL-3.0-or-later
@@ -17,19 +17,6 @@
 if ( ! defined( 'ABSPATH' ) ) {
 	exit;
 }
-
-// Load GitHub plugin updater.
-require 'includes/plugin-update-checker/plugin-update-checker.php';
-
-use YahnisElsts\PluginUpdateChecker\v5\PucFactory;
-
-$updater = PucFactory::buildUpdateChecker(
-	'https://github.com/OllieWP/menu-designer',
-	__FILE__,
-	'menu-designer'
-);
-
-$updater->getVcsApi()->enableReleaseAssets();
 
 /**
  * Registers the block using the metadata loaded from the `block.json` file.

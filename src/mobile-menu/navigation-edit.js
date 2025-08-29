@@ -107,7 +107,7 @@ const withMobileMenuControls = createHigherOrderComponent( ( BlockEdit ) => {
 							templateArea="menu"
 							label={ __(
 								'Mobile Menu',
-								'menu-designer'
+								'ollie-menu-designer'
 							) }
 							help={ 
 								isResolving ? (

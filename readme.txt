@@ -1,14 +1,14 @@
-=== Menu Designer ===
+=== Ollie Menu Designer ===
 Contributors: mmcalister, patrickposner
-Tags: dropdown menu, navigation, menu, block, gutenberg, dropdown, mobile menu, responsive
-Requires at least: 6.0
-Tested up to: 6.7
+Tags: mobile menu, dropdown menu, navigation, block, mega menu
+Requires at least: 6.5
+Tested up to: 6.8
 Stable tag: 0.1.7
 Requires PHP: 7.4
-License: GPLv2 or later
+License: GPLv3 or later
 License URI: https://www.gnu.org/licenses/gpl-2.0.html
 
-Design custom dropdown menus and mobile menus for WordPress navigation with the power of the block editor. Create rich dropdown menus and responsive mobile navigation with any blocks.
+Create custom dropdown & mobile menus using WordPress blocks. Design rich, responsive navigation with any block content in the block editor.
 
 == Description ==
 

@@ -180,7 +180,7 @@ export default function Edit( { attributes, setAttributes } ) {
 						} }
 						help={ __(
 							'Display dropdown on mouse hover',
-							'menu-designer'
+							'ollie-menu-designer'
 						) }
 					/>
 					{ showOnHover && (
@@ -229,7 +229,7 @@ export default function Edit( { attributes, setAttributes } ) {
 									>
 										{ __(
 											'Add link',
-											'menu-designer'
+											'ollie-menu-designer'
 										) }
 									</Button>
 								) }
@@ -245,11 +245,11 @@ export default function Edit( { attributes, setAttributes } ) {
 											url
 												? __(
 														'Edit link URL',
-														'menu-designer'
+														'ollie-menu-designer'
 												  )
 												: __(
 														'Add link URL',
-														'menu-designer'
+														'ollie-menu-designer'
 												  )
 										}
 									>
@@ -287,7 +287,7 @@ export default function Edit( { attributes, setAttributes } ) {
 							<p className="ollie-mega-menu__layout-help">
 								{ __(
 									'When hover is enabled, clicking the menu item will navigate to this URL.',
-									'menu-designer'
+									'ollie-menu-designer'
 								) }
 							</p>
 						</div>
@@ -295,7 +295,7 @@ export default function Edit( { attributes, setAttributes } ) {
 					<ToggleControl
 						label={ __(
 							'Disable in mobile menu',
-							'menu-designer'
+							'ollie-menu-designer'
 						) }
 						checked={ disableWhenCollapsed }
 						onChange={ () => {
@@ -305,7 +305,7 @@ export default function Edit( { attributes, setAttributes } ) {
 						} }
 						help={ __(
 							'Hide on mobile or link to a URL',
-							'menu-designer'
+							'ollie-menu-designer'
 						) }
 					/>
 					{ disableWhenCollapsed && (
@@ -355,7 +355,7 @@ export default function Edit( { attributes, setAttributes } ) {
 										>
 											{ __(
 												'Add mobile link',
-												'menu-designer'
+												'ollie-menu-designer'
 											) }
 										</Button>
 									) }
@@ -371,11 +371,11 @@ export default function Edit( { attributes, setAttributes } ) {
 												collapsedUrl
 													? __(
 															'Edit fallback URL',
-															'menu-designer'
+															'ollie-menu-designer'
 													  )
 													: __(
 															'Add fallback URL',
-															'menu-designer'
+															'ollie-menu-designer'
 													  )
 											}
 										>
@@ -413,7 +413,7 @@ export default function Edit( { attributes, setAttributes } ) {
 								<p className="ollie-mega-menu__layout-help">
 									{ __(
 										'Link to a URL instead of displaying the dropdown on mobile.',
-										'menu-designer'
+										'ollie-menu-designer'
 									) }
 								</p>
 							</div>
@@ -482,7 +482,7 @@ export default function Edit( { attributes, setAttributes } ) {
 							<p className="ollie-mega-menu__layout-help">
 								{ __(
 									'When using wide or full width, the menu will be auto centered on the page.',
-									'menu-designer'
+									'ollie-menu-designer'
 								) }
 							</p>
 							<Spacer marginBottom={ 6 } />
@@ -495,11 +495,11 @@ export default function Edit( { attributes, setAttributes } ) {
 								__nextHasNoMarginBottom
 								label={ __(
 									'Custom width',
-									'menu-designer'
+									'ollie-menu-designer'
 								) }
 								help={ __(
 									'Set a custom width in pixels.',
-									'menu-designer'
+									'ollie-menu-designer'
 								) }
 								value={ customWidth }
 								onChange={ ( newCustomWidth ) =>
@@ -521,7 +521,7 @@ export default function Edit( { attributes, setAttributes } ) {
 						label={ __( 'Top spacing', 'ollie-menu-designer' ) }
 						help={ __(
 							'The amount of space between the dropdown and the navigation item.',
-							'menu-designer'
+							'ollie-menu-designer'
 						) }
 						value={ topSpacing }
 						onChange={ ( newTopSpacing ) =>
@@ -549,7 +549,7 @@ export default function Edit( { attributes, setAttributes } ) {
 						} }
 						help={ __(
 							'The description will be displayed in the menu if the current theme supports it.',
-							'menu-designer'
+							'ollie-menu-designer'
 						) }
 						autoComplete="off"
 					/>
@@ -562,7 +562,7 @@ export default function Edit( { attributes, setAttributes } ) {
 						} }
 						help={ __(
 							'Additional information to help clarify the purpose of the link.',
-							'menu-designer'
+							'ollie-menu-designer'
 						) }
 						autoComplete="off"
 					/>
@@ -581,7 +581,7 @@ export default function Edit( { attributes, setAttributes } ) {
 						}
 						aria-label={ __(
 							'Dropdown link text',
-							'menu-designer'
+							'ollie-menu-designer'
 						) }
 						placeholder={ __( 'Add label…', 'ollie-menu-designer' ) }
 						allowedFormats={ [
