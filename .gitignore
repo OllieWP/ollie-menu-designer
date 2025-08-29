@@ -50,4 +50,8 @@ Sites
 zip-plugin.sh
 zip
 *.zip
+
+# Config Files #
+###############
 package-lock.json
+.editorconfig
