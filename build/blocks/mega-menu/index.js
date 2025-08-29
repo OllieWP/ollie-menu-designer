@@ -856,22 +856,10 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _wordpress_element__WEBPACK_IMPORTED_MODULE_2___default = /*#__PURE__*/__webpack_require__.n(_wordpress_element__WEBPACK_IMPORTED_MODULE_2__);
 /* harmony import */ var _wordpress_components__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! @wordpress/components */ "@wordpress/components");
 /* harmony import */ var _wordpress_components__WEBPACK_IMPORTED_MODULE_3___default = /*#__PURE__*/__webpack_require__.n(_wordpress_components__WEBPACK_IMPORTED_MODULE_3__);
-/* harmony import */ var _wordpress_icons__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! @wordpress/icons */ "./node_modules/@wordpress/icons/build-module/library/close-small.js");
-/* harmony import */ var _images_ollie_video_menu_designer_webp__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ../images/ollie-video-menu-designer.webp */ "./src/images/ollie-video-menu-designer.webp");
-/* harmony import */ var _images_ollie_video_mobile_webp__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ../images/ollie-video-mobile.webp */ "./src/images/ollie-video-mobile.webp");
-/* harmony import */ var _images_ollie_video_dropdown_webp__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ../images/ollie-video-dropdown.webp */ "./src/images/ollie-video-dropdown.webp");
-/* harmony import */ var _images_ollie_video_menu_webp__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! ../images/ollie-video-menu.webp */ "./src/images/ollie-video-menu.webp");
+/* harmony import */ var _wordpress_icons__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! @wordpress/icons */ "./node_modules/@wordpress/icons/build-module/library/close-small.js");
 
 /**
  * WordPress dependencies
- */
-
-
-
-
-
-/**
- * Internal dependencies
  */
 
 
@@ -942,7 +930,7 @@ function MenuDesignerGuide({
     }
   }, buttonText), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_wordpress_components__WEBPACK_IMPORTED_MODULE_3__.Button, {
     variant: "link",
-    icon: _wordpress_icons__WEBPACK_IMPORTED_MODULE_8__["default"],
+    icon: _wordpress_icons__WEBPACK_IMPORTED_MODULE_4__["default"],
     iconSize: 22,
     onClick: handleDismiss,
     label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)('Dismiss guide', 'ollie-menu-designer'),
@@ -957,67 +945,35 @@ function MenuDesignerGuide({
     pages: [{
       content: (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(react__WEBPACK_IMPORTED_MODULE_0__.Fragment, null, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("h2", null, (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)('Welcome to Menu Designer!', 'ollie-menu-designer')), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("p", null, (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)('This guide will help you create your first mobile or dropdown menu. Watch the complete video tutorial below to get started or click "Next" to learn specific tips.', 'ollie-menu-designer')), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", {
         className: "ollie-menu-designer-guide-video"
-      }, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("a", {
-        href: "https://www.youtube.com/watch?v=UXWOafpBn38",
-        target: "_blank",
-        rel: "noopener noreferrer"
-      }, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("img", {
-        src: _images_ollie_video_menu_designer_webp__WEBPACK_IMPORTED_MODULE_4__,
-        alt: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)('Menu Designer Video Tutorial', 'ollie-menu-designer'),
-        style: {
-          width: '100%',
-          height: 'auto',
-          cursor: 'pointer'
-        }
-      }))))
+      }, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("iframe", {
+        src: "https://www.youtube.com/embed/UXWOafpBn38",
+        frameborder: "0",
+        allowfullscreen: true
+      })))
     }, {
       content: (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(react__WEBPACK_IMPORTED_MODULE_0__.Fragment, null, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("h2", null, (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)('Add a mobile menu', 'ollie-menu-designer')), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("p", null, (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)('To add a mobile menu, select the Navigation block and click Settings tab in the block settings sidebar. Here, you can select or create a mobile menu. In the Styles tab, you can customize the various colors of the mobile menu.', 'ollie-menu-designer')), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", {
         className: "ollie-menu-designer-guide-video"
-      }, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("a", {
-        href: "https://www.youtube.com/watch?v=UXWOafpBn38&t=150s",
-        target: "_blank",
-        rel: "noopener noreferrer"
-      }, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("img", {
-        src: _images_ollie_video_mobile_webp__WEBPACK_IMPORTED_MODULE_5__,
-        alt: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)('Mobile Menu Tutorial', 'ollie-menu-designer'),
-        style: {
-          width: '100%',
-          height: 'auto',
-          cursor: 'pointer'
-        }
-      }))))
+      }, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("iframe", {
+        src: "https://www.youtube.com/embed/UXWOafpBn38?start=150",
+        frameborder: "0",
+        allowfullscreen: true
+      })))
     }, {
       content: (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(react__WEBPACK_IMPORTED_MODULE_0__.Fragment, null, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("h2", null, (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)('Add a dropdown menu item', 'ollie-menu-designer')), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("p", null, (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)('To add a dropdown menu item, select the Navigation block and click the "Add Block" button. Use the block inserter to add the "Dropdown Menu" block. Once added, you can create or select a dropdown menu and configure it with the available settings.', 'ollie-menu-designer')), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", {
         className: "ollie-menu-designer-guide-video"
-      }, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("a", {
-        href: "https://www.youtube.com/watch?v=UXWOafpBn38&t=421s",
-        target: "_blank",
-        rel: "noopener noreferrer"
-      }, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("img", {
-        src: _images_ollie_video_dropdown_webp__WEBPACK_IMPORTED_MODULE_6__,
-        alt: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)('Dropdown Menu Tutorial', 'ollie-menu-designer'),
-        style: {
-          width: '100%',
-          height: 'auto',
-          cursor: 'pointer'
-        }
-      }))))
+      }, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("iframe", {
+        src: "https://www.youtube.com/embed/UXWOafpBn38?start=421",
+        frameborder: "0",
+        allowfullscreen: true
+      })))
     }, {
       content: (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(react__WEBPACK_IMPORTED_MODULE_0__.Fragment, null, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("h2", null, (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)('Create your first menu', 'ollie-menu-designer')), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("p", null, (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)('You can create your first menu by clicking "create a new one" link under the menu selector as seen in the video below. You can also go to Appearance → Editor → Patterns and create a new menu there as well.', 'ollie-menu-designer')), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", {
         className: "ollie-menu-designer-guide-video"
-      }, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("a", {
-        href: "https://www.youtube.com/watch?v=UXWOafpBn38&t=216s",
-        target: "_blank",
-        rel: "noopener noreferrer"
-      }, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("img", {
-        src: _images_ollie_video_menu_webp__WEBPACK_IMPORTED_MODULE_7__,
-        alt: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)('Create Menu Tutorial', 'ollie-menu-designer'),
-        style: {
-          width: '100%',
-          height: 'auto',
-          cursor: 'pointer'
-        }
-      }))))
+      }, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("iframe", {
+        src: "https://www.youtube.com/embed/UXWOafpBn38?start=216",
+        frameborder: "0",
+        allowfullscreen: true
+      })))
     }]
   }));
 }
@@ -2062,46 +2018,6 @@ __webpack_require__.r(__webpack_exports__);
 
 /***/ }),
 
-/***/ "./src/images/ollie-video-dropdown.webp":
-/*!**********************************************!*\
-  !*** ./src/images/ollie-video-dropdown.webp ***!
-  \**********************************************/
-/***/ ((module, __unused_webpack_exports, __webpack_require__) => {
-
-module.exports = __webpack_require__.p + "images/ollie-video-dropdown.bbea924e.webp";
-
-/***/ }),
-
-/***/ "./src/images/ollie-video-menu-designer.webp":
-/*!***************************************************!*\
-  !*** ./src/images/ollie-video-menu-designer.webp ***!
-  \***************************************************/
-/***/ ((module, __unused_webpack_exports, __webpack_require__) => {
-
-module.exports = __webpack_require__.p + "images/ollie-video-menu-designer.c7398911.webp";
-
-/***/ }),
-
-/***/ "./src/images/ollie-video-menu.webp":
-/*!******************************************!*\
-  !*** ./src/images/ollie-video-menu.webp ***!
-  \******************************************/
-/***/ ((module, __unused_webpack_exports, __webpack_require__) => {
-
-module.exports = __webpack_require__.p + "images/ollie-video-menu.562484ed.webp";
-
-/***/ }),
-
-/***/ "./src/images/ollie-video-mobile.webp":
-/*!********************************************!*\
-  !*** ./src/images/ollie-video-mobile.webp ***!
-  \********************************************/
-/***/ ((module, __unused_webpack_exports, __webpack_require__) => {
-
-module.exports = __webpack_require__.p + "images/ollie-video-mobile.765a3e99.webp";
-
-/***/ }),
-
 /***/ "react":
 /*!************************!*\
   !*** external "React" ***!
@@ -2318,18 +2234,6 @@ module.exports = /*#__PURE__*/JSON.parse('{"$schema":"https://schemas.wp.org/tru
 /******/ 		};
 /******/ 	})();
 /******/ 	
-/******/ 	/* webpack/runtime/global */
-/******/ 	(() => {
-/******/ 		__webpack_require__.g = (function() {
-/******/ 			if (typeof globalThis === 'object') return globalThis;
-/******/ 			try {
-/******/ 				return this || new Function('return this')();
-/******/ 			} catch (e) {
-/******/ 				if (typeof window === 'object') return window;
-/******/ 			}
-/******/ 		})();
-/******/ 	})();
-/******/ 	
 /******/ 	/* webpack/runtime/hasOwnProperty shorthand */
 /******/ 	(() => {
 /******/ 		__webpack_require__.o = (obj, prop) => (Object.prototype.hasOwnProperty.call(obj, prop))
@@ -2344,29 +2248,6 @@ module.exports = /*#__PURE__*/JSON.parse('{"$schema":"https://schemas.wp.org/tru
 /******/ 			}
 /******/ 			Object.defineProperty(exports, '__esModule', { value: true });
 /******/ 		};
-/******/ 	})();
-/******/ 	
-/******/ 	/* webpack/runtime/publicPath */
-/******/ 	(() => {
-/******/ 		var scriptUrl;
-/******/ 		if (__webpack_require__.g.importScripts) scriptUrl = __webpack_require__.g.location + "";
-/******/ 		var document = __webpack_require__.g.document;
-/******/ 		if (!scriptUrl && document) {
-/******/ 			if (document.currentScript)
-/******/ 				scriptUrl = document.currentScript.src;
-/******/ 			if (!scriptUrl) {
-/******/ 				var scripts = document.getElementsByTagName("script");
-/******/ 				if(scripts.length) {
-/******/ 					var i = scripts.length - 1;
-/******/ 					while (i > -1 && !scriptUrl) scriptUrl = scripts[i--].src;
-/******/ 				}
-/******/ 			}
-/******/ 		}
-/******/ 		// When supporting browsers where an automatic publicPath is not supported you must specify an output.publicPath manually via configuration
-/******/ 		// or pass an empty string ("") and set the __webpack_public_path__ variable from your code to use your own logic.
-/******/ 		if (!scriptUrl) throw new Error("Automatic publicPath is not supported in this browser");
-/******/ 		scriptUrl = scriptUrl.replace(/#.*$/, "").replace(/\?.*$/, "").replace(/\/[^\/]+$/, "/");
-/******/ 		__webpack_require__.p = scriptUrl + "../../";
 /******/ 	})();
 /******/ 	
 /******/ 	/* webpack/runtime/jsonp chunk loading */

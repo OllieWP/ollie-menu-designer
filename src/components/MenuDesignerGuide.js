@@ -7,14 +7,6 @@ import { Button, Guide, __experimentalHStack as HStack } from '@wordpress/compon
 import { closeSmall } from '@wordpress/icons';
 
 /**
- * Internal dependencies
- */
-import menuDesignerVideo from '../images/ollie-video-menu-designer.webp';
-import mobileVideo from '../images/ollie-video-mobile.webp';
-import dropdownVideo from '../images/ollie-video-dropdown.webp';
-import menuVideo from '../images/ollie-video-menu.webp';
-
-/**
  * Menu Designer Guide Component
  * 
  * Displays a guide modal with tutorial information about the Menu Designer plugin.
@@ -91,17 +83,11 @@ export default function MenuDesignerGuide( {
 									<h2>{ __( 'Welcome to Menu Designer!', 'ollie-menu-designer' ) }</h2>
 									<p>{ __( 'This guide will help you create your first mobile or dropdown menu. Watch the complete video tutorial below to get started or click "Next" to learn specific tips.', 'ollie-menu-designer' ) }</p>
 									<div className="ollie-menu-designer-guide-video">
-										<a 
-											href="https://www.youtube.com/watch?v=UXWOafpBn38" 
-											target="_blank" 
-											rel="noopener noreferrer"
-										>
-											<img 
-												src={ menuDesignerVideo }
-												alt={ __( 'Menu Designer Video Tutorial', 'ollie-menu-designer' ) }
-												style={ { width: '100%', height: 'auto', cursor: 'pointer' } }
-											/>
-										</a>
+										<iframe 
+											src='https://www.youtube.com/embed/UXWOafpBn38'
+											frameborder='0'
+											allowfullscreen
+										/>
 									</div>
 								</>
 							),
@@ -112,17 +98,11 @@ export default function MenuDesignerGuide( {
 									<h2>{ __( 'Add a mobile menu', 'ollie-menu-designer' ) }</h2>
 									<p>{ __( 'To add a mobile menu, select the Navigation block and click Settings tab in the block settings sidebar. Here, you can select or create a mobile menu. In the Styles tab, you can customize the various colors of the mobile menu.', 'ollie-menu-designer' ) }</p>
 									<div className="ollie-menu-designer-guide-video">
-										<a 
-											href="https://www.youtube.com/watch?v=UXWOafpBn38&t=150s" 
-											target="_blank" 
-											rel="noopener noreferrer"
-										>
-											<img 
-												src={ mobileVideo }
-												alt={ __( 'Mobile Menu Tutorial', 'ollie-menu-designer' ) }
-												style={ { width: '100%', height: 'auto', cursor: 'pointer' } }
-											/>
-										</a>
+										<iframe 
+											src='https://www.youtube.com/embed/UXWOafpBn38?start=150'
+											frameborder='0'
+											allowfullscreen
+										/>
 									</div>
 								</>
 							),
@@ -133,17 +113,11 @@ export default function MenuDesignerGuide( {
 									<h2>{ __( 'Add a dropdown menu item', 'ollie-menu-designer' ) }</h2>
 									<p>{ __( 'To add a dropdown menu item, select the Navigation block and click the "Add Block" button. Use the block inserter to add the "Dropdown Menu" block. Once added, you can create or select a dropdown menu and configure it with the available settings.', 'ollie-menu-designer' ) }</p>
 									<div className="ollie-menu-designer-guide-video">
-										<a 
-											href="https://www.youtube.com/watch?v=UXWOafpBn38&t=421s" 
-											target="_blank" 
-											rel="noopener noreferrer"
-										>
-											<img 
-												src={ dropdownVideo }
-												alt={ __( 'Dropdown Menu Tutorial', 'ollie-menu-designer' ) }
-												style={ { width: '100%', height: 'auto', cursor: 'pointer' } }
-											/>
-										</a>
+										<iframe 
+											src='https://www.youtube.com/embed/UXWOafpBn38?start=421'
+											frameborder='0'
+											allowfullscreen
+										/>
 									</div>
 								</>
 							),
@@ -154,17 +128,11 @@ export default function MenuDesignerGuide( {
 									<h2>{ __( 'Create your first menu', 'ollie-menu-designer' ) }</h2>
 									<p>{ __( 'You can create your first menu by clicking "create a new one" link under the menu selector as seen in the video below. You can also go to Appearance → Editor → Patterns and create a new menu there as well.', 'ollie-menu-designer' ) }</p>
 									<div className="ollie-menu-designer-guide-video">
-										<a 
-											href="https://www.youtube.com/watch?v=UXWOafpBn38&t=216s" 
-											target="_blank" 
-											rel="noopener noreferrer"
-										>
-											<img 
-												src={ menuVideo }
-												alt={ __( 'Create Menu Tutorial', 'ollie-menu-designer' ) }
-												style={ { width: '100%', height: 'auto', cursor: 'pointer' } }
-											/>
-										</a>
+										<iframe 
+											src='https://www.youtube.com/embed/UXWOafpBn38?start=216'
+											frameborder='0'
+											allowfullscreen
+										/>
 									</div>
 								</>
 							),
