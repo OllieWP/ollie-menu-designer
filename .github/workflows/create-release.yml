@@ -99,6 +99,8 @@ jobs:
               -x "*.sh" \
               -x "CLAUDE.md" \
               -x ".editorconfig" \
+              -x ".gitignore" \
+              -x ".gitattributes" \
               -x ".claude/*"
 
       - name: Create Release
