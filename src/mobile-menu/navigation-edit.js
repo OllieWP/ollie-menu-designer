@@ -3,7 +3,7 @@
  */
 import { __ } from '@wordpress/i18n';
 import { InspectorControls } from '@wordpress/block-editor';
-import { PanelBody } from '@wordpress/components';
+import { PanelBody, ToggleControl, TextControl } from '@wordpress/components';
 import { createHigherOrderComponent } from '@wordpress/compose';
 import { addFilter } from '@wordpress/hooks';
 import { useEffect } from '@wordpress/element';
@@ -35,7 +35,9 @@ const withMobileMenuControls = createHigherOrderComponent( ( BlockEdit ) => {
 			mobileMenuSlug,
 			mobileMenuBackgroundColor,
 			mobileIconBackgroundColor,
-			mobileIconColor
+			mobileIconColor,
+			mobileMenuBreakpointEnabled,
+			mobileMenuBreakpoint
 		} = attributes;
 
 		// Check if menu templates are available
@@ -168,6 +170,36 @@ const withMobileMenuControls = createHigherOrderComponent( ( BlockEdit ) => {
 							}
 							previewBackgroundColor={ mobileMenuBackgroundColor }
 						/>
+						<ToggleControl
+							label={ __( 'Change mobile menu breakpoint', 'menu-designer' ) }
+							checked={ mobileMenuBreakpointEnabled || false }
+							onChange={ ( value ) =>
+								setAttributes( { mobileMenuBreakpointEnabled: value } )
+							}
+							help={ mobileMenuBreakpointEnabled ? __( 'Set a custom breakpoint for when the mobile menu appears. Default is 600px.', 'menu-designer' ) : '' }
+						/>
+						{ mobileMenuBreakpointEnabled && (
+							<TextControl
+								label={ __( 'Breakpoint (px)', 'menu-designer' ) }
+								type="number"
+								value={ mobileMenuBreakpoint !== undefined ? mobileMenuBreakpoint : '' }
+								placeholder="600"
+								onChange={ ( value ) => {
+									// Allow empty value for easier editing
+									if ( value === '' ) {
+										setAttributes( { mobileMenuBreakpoint: undefined } );
+										return;
+									}
+									const numValue = parseInt( value, 10 );
+									if ( ! isNaN( numValue ) ) {
+										setAttributes( { mobileMenuBreakpoint: numValue } );
+									}
+								} }
+								help={ __( 'Mobile menu will appear below this screen width. Default: 600px', 'menu-designer' ) }
+								min={ 200 }
+								max={ 2000 }
+							/>
+						) }
 					</PanelBody>
 				</InspectorControls>
 				<InspectorControls group="color">
@@ -221,6 +253,14 @@ const addMobileMenuAttribute = ( settings, name ) => {
 			customMobileIconColor: {
 				type: 'string',
 				default: '',
+			},
+			mobileMenuBreakpointEnabled: {
+				type: 'boolean',
+				default: false,
+			},
+			mobileMenuBreakpoint: {
+				type: 'number',
+				default: 600,
 			},
 		},
 	};

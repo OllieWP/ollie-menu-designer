@@ -52,6 +52,14 @@ function register_navigation_block_attributes() {
 			'type' => 'string',
 			'default' => '',
 		),
+		'mobileMenuBreakpointEnabled' => array(
+			'type' => 'boolean',
+			'default' => false,
+		),
+		'mobileMenuBreakpoint' => array(
+			'type' => 'number',
+			'default' => 600,
+		),
 	);
 
 	// Merge with existing attributes
@@ -84,6 +92,8 @@ function get_mobile_menu_attributes( $attributes ) {
 		'background_color'      => $get_color_value( 'mobileMenuBackgroundColor', 'customMobileMenuBackgroundColor' ),
 		'icon_background_color' => $get_color_value( 'mobileIconBackgroundColor', 'customMobileIconBackgroundColor' ),
 		'icon_color'           => $get_color_value( 'mobileIconColor', 'customMobileIconColor' ),
+		'breakpoint_enabled'    => ! empty( $attributes['mobileMenuBreakpointEnabled'] ) ? (bool) $attributes['mobileMenuBreakpointEnabled'] : false,
+		'breakpoint'           => ! empty( $attributes['mobileMenuBreakpoint'] ) ? absint( $attributes['mobileMenuBreakpoint'] ) : 600,
 	);
 }
 
@@ -148,7 +158,7 @@ function inject_mobile_menu_content( $content, $mobile_menu_slug ) {
 }
 
 /**
- * Generate CSS rules for mobile menu colors
+ * Generate CSS rules for mobile menu colors and breakpoint
  *
  * @param string $nav_id Navigation block ID.
  * @param array  $menu_attrs Menu attributes.
@@ -158,6 +168,18 @@ function inject_mobile_menu_content( $content, $mobile_menu_slug ) {
 function generate_css_rules( $nav_id, $menu_attrs, $has_mobile_menu ) {
 	$css_rules = array();
 	$escaped_id = esc_attr( $nav_id );
+	
+	// Add custom breakpoint CSS if enabled
+	if ( $menu_attrs['breakpoint_enabled'] && $menu_attrs['breakpoint'] ) {
+		$breakpoint = absint( $menu_attrs['breakpoint'] );
+		
+		// Show mobile menu toggle and hide desktop menu below breakpoint
+		$css_rules[] = sprintf(
+			'@media (max-width: %1$dpx) { #%2$s .wp-block-navigation__responsive-container-open:not(.always-shown) { display: flex !important; } #%2$s .wp-block-navigation__responsive-container:not(.is-menu-open) { display: none !important; }  }',
+			$breakpoint - 1,
+			$escaped_id
+		);
+	}
 	
 	// Background color only applies with mobile menu
 	if ( $menu_attrs['background_color'] && $has_mobile_menu ) {
@@ -229,10 +251,11 @@ function add_mobile_menu_to_navigation( $block_content, $block ) {
 	$attributes = $block['attrs'] ?? array();
 	$menu_attrs = get_mobile_menu_attributes( $attributes );
 	$has_mobile_menu = ! empty( $menu_attrs['mobile_menu_slug'] );
+	$has_breakpoint = $menu_attrs['breakpoint_enabled'] && $menu_attrs['breakpoint'];
 	$has_colors = $menu_attrs['icon_background_color'] || $menu_attrs['icon_color'] || ( $menu_attrs['background_color'] && $has_mobile_menu );
 	
 	// Early return if nothing to do
-	if ( ! $has_mobile_menu && ! $has_colors ) {
+	if ( ! $has_mobile_menu && ! $has_colors && ! $has_breakpoint ) {
 		return $block_content;
 	}
 
@@ -246,8 +269,8 @@ function add_mobile_menu_to_navigation( $block_content, $block ) {
 		$modified_content = inject_mobile_menu_content( $modified_content, $menu_attrs['mobile_menu_slug'] );
 	}
 	
-	// Add inline CSS for colors if needed
-	if ( $has_colors ) {
+	// Add inline CSS for colors and/or breakpoint if needed
+	if ( $has_colors || $has_breakpoint ) {
 		$nav_id = 'nav-' . wp_unique_id();
 		$css_rules = generate_css_rules( $nav_id, $menu_attrs, $has_mobile_menu );
 		$modified_content = add_inline_styles( $modified_content, $css_rules, $nav_id );
