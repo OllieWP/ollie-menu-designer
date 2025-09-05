@@ -1,6 +1,6 @@
 <?php
 /**
- * Plugin Name:       Ollie Menu Designer
+ * Plugin Name:       Menu Designer
  * Description:       Design stunning mobile navigation and dropdown menus in minutes using the native WordPress block editor — no coding required.
  * Requires at least: 6.5
  * Requires PHP:      7.4

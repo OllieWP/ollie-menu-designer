@@ -1,4 +1,4 @@
-=== Ollie Menu Designer ===
+=== Menu Designer ===
 Contributors: mmcalister, patrickposner
 Donate link: https://olliewp.com
 Tags: mobile menu, dropdown menu, navigation, block, mega menu
@@ -157,7 +157,7 @@ While Menu Designer gives you extensive design control through blocks and Global
 = 0.1.3 =
 * Add menu item link when hover is in use
 * Default hover behavior to click on mobile
-* Make sure fallback url is hidden by default		
+* Make sure fallback url is hidden by default
 
 = 0.1.0 =
 * Initial release
