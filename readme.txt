@@ -1,5 +1,6 @@
 === Ollie Menu Designer ===
 Contributors: mmcalister, patrickposner
+Donate link: https://olliewp.com
 Tags: mobile menu, dropdown menu, navigation, block, mega menu
 Requires at least: 6.5
 Tested up to: 6.8
@@ -12,120 +13,131 @@ Create custom dropdown & mobile menus using WordPress blocks. Design rich, respo
 
 == Description ==
 
-**Menu Designer** brings the full power of the WordPress block editor to your navigation menus! Create stunning dropdown menus and custom mobile menus with rich content, images, columns, and any blocks you love – all without leaving the familiar WordPress interface.
+https://youtu.be/UXWOafpBn38
 
-Unlike traditional menu plugins that require complex configurations and custom interfaces, Menu Designer integrates seamlessly with WordPress's native navigation block. Simply add the Menu Designer block to any navigation menu or configure a custom mobile menu template, and start designing!
+Create stunning, content-rich dropdown, mobile, and mega menus using the WordPress block editor and full site editing. [Menu Designer](https://olliewp.com/menu-designer) lets you build beautiful dropdown menus and mobile navigation with images, buttons, call-to-actions, and any other blocks – giving you the same creative freedom you have when designing your pages.
 
-= Key Features =
-
-* **Block-Based Design** - Use any WordPress blocks to build your dropdown menus and mobile menus
-* **Visual Editing** - Design your menus with the Site Editor's live preview
-* **Template Parts** - Menus are saved as reusable and portable template parts
-* **Custom Mobile Menus** - Replace default mobile navigation with custom designed templates
-* **Responsive Controls** - Choose different behaviors for mobile devices
-* **Flexible Layouts** - Content, wide, full, or custom width options for dropdown menus
-* **Smart Positioning** - Automatic edge detection prevents off-screen menus
-* **Performance Focused** - Menus load only when needed
-* **Accessibility Ready** - Keyboard navigation and screen reader support
+Menu Designer puts you in complete control of how your menus look and function. Best of all, if you're using the [free Ollie theme](https://olliewp.com/download/), you'll get access to a collection of beautifully pre-designed menu templates to help you get started quickly.
 
 = Design Freedom =
+Create dropdown menus and mobile menus that match your vision using any WordPress block you can imagine. Whether you need multi-column layouts, featured images and galleries, rich text with custom typography, or buttons and call-to-action elements, Menu Designer gives you complete creative control. You can even include recent posts, product grids, search bars, forms, custom HTML, and literally any other block to build exactly the navigation experience your site needs.
 
-Create dropdown menus and mobile menus that match your vision:
-
-* Multi-column layouts with the Columns block
-* Featured images and galleries
-* Rich text with custom typography
-* Buttons and call-to-action elements
-* Recent posts or product grids
-* Search bars and forms
-* Custom HTML and shortcodes
-* And literally any other block!
+* Multi-column layouts with images, text, and buttons
+* Rich content like galleries, forms, and product grids
+* Complete creative control with any WordPress block
 
 = Mobile-First Options =
+Your menus look great on every device with Menu Designer's mobile-optimized approach. Design custom mobile menu experiences that replace default navigation with beautiful, touch-friendly interfaces. You have complete control over responsive behavior, including the ability to disable dropdowns on mobile with fallback URLs, set custom breakpoints, and ensure optimized performance across all devices.
 
-Your menus look great on every device:
+* Fast, beautiful mobile menu designs with touch-friendly interactions
+* Choose from several pre-designed menu patterns
+* Optimized performance across all devices
 
-* Custom mobile menu designs that replace default navigation
-* Disable dropdowns on mobile with fallback URLs
-* Custom breakpoints for responsive behavior
-* Touch-friendly interaction patterns
-* Optimized performance for mobile devices
+= Build faster with Ollie =
 
-= Easy to Use =
+Get started instantly with the free Ollie block theme, which comes packed with beautiful pre-designed menu templates and patterns built specifically for Menu Designer. Instead of starting from scratch, you'll have access to professionally-crafted mobile menus, dropdown designs, and mega menu layouts that seamlessly integrate with Ollie's design system. Simply install the theme, browse the menu pattern library, and customize the designs to match your brand – no design experience required.
 
-**For Dropdown Menus:**
-1. Add a Navigation block to your header
-2. Insert the Menu Designer block as a navigation item
-3. Choose or create a menu template
-4. Design your dropdown menu in the Site Editor
-5. Publish and enjoy!
+Pre-designed menu templates and patterns included
+Seamless integration with Ollie's design system
+Professional designs ready to customize for your brand
 
-**For Mobile Menus:**
-1. Add a Navigation block to your header
-2. Open the Navigation block settings
-3. In the Mobile Menu panel, select a mobile design template
-4. Design your mobile menu in the Site Editor
-5. Your custom mobile menu appears automatically on mobile devices!
+= Adding Mobile Menus with Menu Designer =
 
-= Developer Friendly =
+**We've created a [full video tutorial](https://youtu.be/UXWOafpBn38?t=150) on creating mobile menus.**
 
-* Built with modern WordPress development practices
-* Clean, semantic markup
-* Works with block themes
+1. Navigate to Appearance → Editor → Patterns and edit your Header template part
+2. Click the Navigation block
+3. In the Navigation block Settings tab, find the Mobile Menu panel
+4. Click "Create a new one" or select from existing mobile menu templates
+5. Choose from pre-designed Ollie patterns or build custom with blocks
+6. Save your menu and select it in the Mobile Menu panel
+7. Customize background colors and menu icon in the mobile menu settings
 
-== Installation ==
+= Adding Dropdowns and Mega Menus with Menu Designer =
 
-1. Upload the plugin files to the `/wp-content/plugins/menu-designer` directory, or install the plugin through the WordPress plugins screen directly.
-2. Activate the plugin through the 'Plugins' screen in WordPress
-3. Add a Navigation block to your site (usually in the header)
-4. Click the + button to add a block to your navigation
-5. Search for "Menu Designer" and insert the block
-6. Configure your dropdown menu settings and create your content!
+**We've created a [full video tutorial](https://youtu.be/UXWOafpBn38?t=421) on creating drop down and mega menus.**
+
+1. Navigate to Appearance → Editor → Patterns and edit your Header template part
+2. Click Add Block and search for "Dropdown Menu"
+3. Name your dropdown and position it in your navigation
+4. In the Dropdown Menu block Settings tab, find the dropdown menu panel
+5. Click "Create a new one" or select from existing dropdown menu templates
+6. Choose from pre-designed Ollie patterns or build custom with blocks
+7. Save your menu and select it in the dropdown menu panel
+8. Configure additional customization settings
+
+
+= Adding Starter Patterns =
+
+You can create custom starter patterns for menu templates to give users quick starting points for their menus. This is especially useful for theme developers who want to provide pre-designed menu layouts.
+
+**How to Add Starter Patterns**
+
+1. Create a `/patterns` folder in your theme or plugin directory
+2. Add your pattern files (PHP format) to this folder
+3. In each pattern file, ensure you include the following in your pattern header:
+
+`Block Types: core/template-part/menu`
+
+This ensures your pattern appears as an option when creating new menu template parts.
 
 = Requirements =
 
-* WordPress 6.0 or higher
-* PHP 7.4 or higher
-* A theme that supports navigation blocks
+* WordPress 6.5 or higher
+* A WordPress block theme like [Ollie](https://olliewp.com) that supports the WordPress navigation block
 
 == Frequently Asked Questions ==
 
-= How do I create my first dropdown menu? =
+= Does this work with my existing theme? =
 
-After installing the plugin, add a Navigation block to your site (usually in your header template). Then add the Menu Designer block inside the navigation. Click "Create New" to design your menu template in the Site Editor.
+Yes! Menu Designer works with any theme that supports WordPress navigation blocks. This includes all block themes and many classic themes with navigation block support. For the best experience with pre-designed menu patterns, we recommend using the free Ollie theme. You can search for "Ollie" on your Themes page in the WordPress dashboard, or visit olliewp.com to download and learn more about the theme.
 
-= How do I create a custom mobile menu? =
+= Where can I get more templates and patterns? =
 
-In any Navigation block, go to the block settings and find the Mobile Menu panel. Select a mobile design template or create a new one. Your custom mobile menu will automatically replace the default mobile navigation on smaller screens.
+Menu Designer comes with several starter patterns, but for access to hundreds of professionally-designed menu templates and patterns, check out Ollie Pro. [Ollie Pro](https://olliewp.com/pro) includes an extensive pattern library with multiple menu collections, dropdown designs, and mobile menu layouts that work seamlessly with Menu Designer.
 
-= Can I use this with my existing theme? =
+= How is this different from other menu plugins? =
 
-Yes! Menu Designer works with any theme that supports navigation blocks. This includes all block themes and many classic themes with navigation block support.
+Unlike traditional menu plugins built for classic themes, Menu Designer is built specifically for the WordPress block editor. You design menus using the same blocks you use for pages - no separate interface or complex settings screens.
 
-= How do I make different menus for different pages? =
+= Can I have different menus on different pages? =
 
-Both dropdown menus and mobile menus are saved as template parts. You can create multiple template parts and use different ones on different navigation menus throughout your site.
+Absolutely! Since menus are saved as template parts, you can create multiple dropdown and mobile menu designs and use different ones throughout your site by adding them to different navigation blocks.
 
-= Can I disable dropdown menus on mobile? =
+= What happens to my menus if I deactivate the plugin? =
 
-Absolutely! Each dropdown menu has a "Disable in mobile menu" option. You can also specify a fallback URL that mobile users will navigate to instead.
+Your menu template parts remain in your site as regular template parts. However, the dropdown and mobile menu functionality will stop working until you reactivate the plugin.
 
-= Is this accessible? =
+= Can I import/export my menu designs? =
 
-Yes! The plugin follows WordPress accessibility standards with proper ARIA attributes, keyboard navigation support, and screen reader compatibility.
+Yes! Since menus are built with WordPress blocks, you can copy and paste menu designs between sites, or export them as part of your theme's pattern library.
 
-= Will this slow down my site? =
+= Will this conflict with other menu plugins? =
 
-No. Dropdown menus are loaded efficiently only when needed. The plugin uses modern performance techniques including lazy loading and optimized asset delivery.
+Menu Designer is designed to work alongside WordPress's native navigation system. However, we recommend deactivating other menu plugins to avoid potential conflicts and ensure the best performance.
+
+= Is this plugin accessible? =
+
+Yes! Menu Designer follows WordPress accessibility standards with proper ARIA attributes, keyboard navigation support, and screen reader compatibility.
+
+= Will this slow down my website? =
+
+No. Menu Designer uses modern performance techniques including efficient loading, optimized CSS delivery, and follows WordPress best practices.
+
+= Can I style menus with custom CSS? =
+
+While Menu Designer gives you extensive design control through blocks and Global Styles, you can also add custom CSS if needed. All menu elements use semantic HTML with proper CSS classes for easy targeting.
 
 == Screenshots ==
 
-1. Adding a dropdown menu block to your navigation - it's as easy as adding any other block!
-2. Designing your dropdown menu with the visual Site Editor - use columns, images, and any blocks
-3. Settings panel showing width options, mobile controls, and link attributes
-4. Live preview of a multi-column dropdown menu with images and styled content
-5. Mobile view showing the fallback behavior options
-6. Managing multiple menu templates in the Site Editor
+1. Create stunning full-width mega menus using WordPress blocks - no coding required.
+2. Design beautiful, content-rich dropdown menus with the WordPress block editor.
+3. Control your dropdown width and alignment with flexible positioning options.
+4. Install the free Ollie theme to access beautiful pre-designed mobile menu patterns.
+5. Customize dropdown menus directly in the block editor with intuitive settings.
+6. Preview your menu designs instantly while building them in the block editor.
+7. Browse and select from professionally-designed menu patterns in Ollie's pattern library.
+8. Design any style of navigation - from simple dropdowns to complex mega menus with rich content.
 
 == Changelog ==
 
