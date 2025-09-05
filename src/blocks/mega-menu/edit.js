@@ -53,7 +53,7 @@ import MenuDesignerGuide from '../../components/MenuDesignerGuide';
  *
  * @return {Element} Element to render.
  */
-export default function Edit( { attributes, setAttributes } ) {
+export default function Edit( { attributes, setAttributes, clientId } ) {
 	const {
 		label,
 		menuSlug,
@@ -89,6 +89,22 @@ export default function Edit( { attributes, setAttributes } ) {
 			setAttributes( { justifyMenu: 'center' } );
 		}
 	}, [ width, justifyMenu, setAttributes ] );
+
+	// Automatically update block metadata name when label changes
+	useEffect( () => {
+		if ( label && label.trim() ) {
+			// Only update if the metadata name is different from the label
+			const currentMetadataName = attributes.metadata?.name;
+			if ( currentMetadataName !== label ) {
+				setAttributes( {
+					metadata: {
+						...( attributes.metadata || {} ),
+						name: label,
+					},
+				} );
+			}
+		}
+	}, [ label, attributes.metadata, setAttributes ] );
 
 	// Modify block props.
 	const blockProps = useBlockProps( {

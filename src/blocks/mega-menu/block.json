@@ -52,7 +52,6 @@
 	"supports": {
 		"html": false,
 		"interactivity": true,
-		"renaming": false,
 		"reusable": false,
 		"typography": {
 			"fontSize": true,
