@@ -143,7 +143,7 @@ export default function TemplatePreviewModal( {
 	return (
 		<Modal
 			title={ sprintf(
-				__( 'Menu Preview: %s', 'menu-designer' ),
+				__( 'Menu Preview: %s', 'ollie-menu-designer' ),
 				templateLabel
 			) }
 			onRequestClose={ handleClose }
@@ -171,7 +171,7 @@ export default function TemplatePreviewModal( {
 						transition: 'opacity 0.3s ease',
 						borderRadius: backgroundColor ? '10px' : '0',
 					} }
-					title={ __( 'Template Preview', 'menu-designer' ) }
+					title={ __( 'Template Preview', 'ollie-menu-designer' ) }
 					onLoad={ handleIframeLoad }
 				/>
 			</PreviewContainer>
@@ -215,7 +215,7 @@ function LoadingIndicator() {
 		>
 			<Spinner />
 			<p style={ { marginTop: '10px' } }>
-				{ __( 'Loading preview…', 'menu-designer' ) }
+				{ __( 'Loading preview…', 'ollie-menu-designer' ) }
 			</p>
 		</div>
 	);

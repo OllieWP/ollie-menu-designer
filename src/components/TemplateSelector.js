@@ -38,7 +38,7 @@ export default function TemplateSelector( {
 	value,
 	onChange,
 	templateArea = 'menu',
-	label = __( 'Dropdown Menu', 'menu-designer' ),
+	label = __( 'Dropdown Menu', 'ollie-menu-designer' ),
 	help = null,
 	previewOptions = {},
 	previewBackgroundColor = null,
@@ -80,7 +80,7 @@ export default function TemplateSelector( {
 
 	// Use the shared template creation hook
 	const baseSlug = templateArea === 'menu' ? 'dropdown-menu' : templateArea;
-	const baseTitle = templateArea === 'menu' ? __( 'Dropdown Menu', 'menu-designer' ) : templateArea;
+	const baseTitle = templateArea === 'menu' ? __( 'Dropdown Menu', 'ollie-menu-designer' ) : templateArea;
 
 	const { createTemplate: createNewTemplate, isCreating } = useTemplateCreation( {
 		templateArea,
@@ -129,7 +129,7 @@ export default function TemplateSelector( {
 							icon={ seen }
 							onClick={ () => setIsPreviewOpen( true ) }
 						>
-							{ __( 'Preview', 'menu-designer' ) }
+							{ __( 'Preview', 'ollie-menu-designer' ) }
 						</Button>
 						<Button
 							variant="tertiary"
@@ -137,7 +137,7 @@ export default function TemplateSelector( {
 							href={ `${ secureSiteUrl }/wp-admin/site-editor.php?p=%2Fwp_template_part%2F${ currentTheme || '' }%2F%2F${ value }&canvas=edit` }
 							target="_blank"
 						>
-							{ __( 'Edit Template', 'menu-designer' ) }
+							{ __( 'Edit Template', 'ollie-menu-designer' ) }
 						</Button>
 					</HStack>
 					<Spacer marginTop={ 6 } />

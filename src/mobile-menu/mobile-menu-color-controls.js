@@ -21,7 +21,7 @@ const MobileMenuColorControls = ({
 		{
 			value: mobileMenuBackgroundColor?.color,
 			onChange: setMobileMenuBackgroundColor,
-			label: __( 'Mobile menu background', 'menu-designer' ),
+			label: __( 'Mobile menu background', 'ollie-menu-designer' ),
 			resetAllFilter: () => ({
 				mobileMenuBackgroundColor: undefined,
 				customMobileMenuBackgroundColor: undefined,
@@ -30,7 +30,7 @@ const MobileMenuColorControls = ({
 		{
 			value: mobileIconBackgroundColor?.color,
 			onChange: setMobileIconBackgroundColor,
-			label: __( 'Mobile toggle background', 'menu-designer' ),
+			label: __( 'Mobile toggle background', 'ollie-menu-designer' ),
 			resetAllFilter: () => ({
 				mobileIconBackgroundColor: undefined,
 				customMobileIconBackgroundColor: undefined,
@@ -39,7 +39,7 @@ const MobileMenuColorControls = ({
 		{
 			value: mobileIconColor?.color,
 			onChange: setMobileIconColor,
-			label: __( 'Mobile toggle icon', 'menu-designer' ),
+			label: __( 'Mobile toggle icon', 'ollie-menu-designer' ),
 			resetAllFilter: () => ({
 				mobileIconColor: undefined,
 				customMobileIconColor: undefined,

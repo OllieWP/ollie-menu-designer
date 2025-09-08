@@ -1,6 +1,6 @@
 {
 	"name": "ollie-menu-designer",
-	"version": "0.1.0",
+	"version": "0.1.7",
 	"description": "Design custom mega menus and mobile menus for WordPress.",
 	"author": "Mike McAlister",
 	"license": "GPL-3.0-or-later",
@@ -18,7 +18,7 @@
 		"plugin-zip": "npm run plugin-zip && copyfiles --verbose menu-designer.zip _playground/ && rm menu-designer.zip"
 	},
 	"devDependencies": {
-		"@wordpress/scripts": "^30.22.0",
+		"@wordpress/scripts": "^30.23.0",
 		"copyfiles": "^2.4.1"
 	},
 	"dependencies": {

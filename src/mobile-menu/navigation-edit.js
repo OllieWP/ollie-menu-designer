@@ -57,7 +57,7 @@ const withMobileMenuControls = createHigherOrderComponent( ( BlockEdit ) => {
 		const { createTemplate: createMobileMenuTemplate, isCreating } = useTemplateCreation( {
 			templateArea: 'menu',
 			baseSlug: 'mobile-menu',
-			baseTitle: __( 'Mobile Menu', 'menu-designer' ),
+			baseTitle: __( 'Mobile Menu', 'ollie-menu-designer' ),
 			existingTemplates: templates,
 			currentTheme: themeSlug,
 			onSuccess: ( newTemplate ) => {
@@ -97,7 +97,7 @@ const withMobileMenuControls = createHigherOrderComponent( ( BlockEdit ) => {
 				<BlockEdit { ...props } />
 				<InspectorControls group="settings">
 					<PanelBody
-						title={ __( 'Mobile Menu', 'menu-designer' ) }
+						title={ __( 'Mobile Menu', 'ollie-menu-designer' ) }
 						initialOpen={ true }
 					>
 						<MenuDesignerGuide />
@@ -109,14 +109,14 @@ const withMobileMenuControls = createHigherOrderComponent( ( BlockEdit ) => {
 							templateArea="menu"
 							label={ __(
 								'Mobile Menu',
-								'menu-designer'
+								'ollie-menu-designer'
 							) }
 							help={
 								isResolving ? (
-									__( 'Loading templates...', 'menu-designer' )
+									__( 'Loading templates...', 'ollie-menu-designer' )
 								) : hasTemplates ? (
 									createInterpolateElement(
-										__( 'Select a menu to use as the mobile menu or <create>create a new one</create> in the <editor>Site Editor</editor>.', 'menu-designer' ),
+										__( 'Select a menu to use as the mobile menu or <create>create a new one</create> in the <editor>Site Editor</editor>.', 'ollie-menu-designer' ),
 										{
 											create: (
 												<a
@@ -146,7 +146,7 @@ const withMobileMenuControls = createHigherOrderComponent( ( BlockEdit ) => {
 									)
 								) : (
 									createInterpolateElement(
-										__( 'No menus found. <a>Create your first menu</a>.', 'menu-designer' ),
+										__( 'No menus found. <a>Create your first menu</a>.', 'ollie-menu-designer' ),
 										{
 											a: (
 												<a
@@ -171,16 +171,16 @@ const withMobileMenuControls = createHigherOrderComponent( ( BlockEdit ) => {
 							previewBackgroundColor={ mobileMenuBackgroundColor }
 						/>
 						<ToggleControl
-							label={ __( 'Change mobile menu breakpoint', 'menu-designer' ) }
+							label={ __( 'Change mobile menu breakpoint', 'ollie-menu-designer' ) }
 							checked={ mobileMenuBreakpointEnabled || false }
 							onChange={ ( value ) =>
 								setAttributes( { mobileMenuBreakpointEnabled: value } )
 							}
-							help={ mobileMenuBreakpointEnabled ? __( 'Set a custom breakpoint for when the mobile menu appears. Default is 600px.', 'menu-designer' ) : '' }
+							help={ mobileMenuBreakpointEnabled ? __( 'Set a custom breakpoint for when the mobile menu appears. Default is 600px.', 'ollie-menu-designer' ) : '' }
 						/>
 						{ mobileMenuBreakpointEnabled && (
 							<TextControl
-								label={ __( 'Breakpoint (px)', 'menu-designer' ) }
+								label={ __( 'Breakpoint (px)', 'ollie-menu-designer' ) }
 								type="number"
 								value={ mobileMenuBreakpoint !== undefined ? mobileMenuBreakpoint : '' }
 								placeholder="600"
@@ -195,7 +195,7 @@ const withMobileMenuControls = createHigherOrderComponent( ( BlockEdit ) => {
 										setAttributes( { mobileMenuBreakpoint: numValue } );
 									}
 								} }
-								help={ __( 'Mobile menu will appear below this screen width. Default: 600px', 'menu-designer' ) }
+								help={ __( 'Mobile menu will appear below this screen width. Default: 600px', 'ollie-menu-designer' ) }
 								min={ 200 }
 								max={ 2000 }
 							/>

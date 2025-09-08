@@ -58,7 +58,7 @@ export default function useTemplateCreation( {
 
 		// Generate the title
 		const title = existingCount > 0
-			? sprintf( __( '%s %d', 'menu-designer' ), baseTitle, displayNumber )
+			? sprintf( __( '%s %d', 'ollie-menu-designer' ), baseTitle, displayNumber )
 			: baseTitle;
 
 		return { slug, title };
@@ -103,7 +103,7 @@ export default function useTemplateCreation( {
 			}
 		} catch ( error ) {
 			console.error( 'Error creating template:', error );
-			alert( __( 'Failed to create template. Please try again.', 'menu-designer' ) );
+			alert( __( 'Failed to create template. Please try again.', 'ollie-menu-designer' ) );
 		} finally {
 			setIsCreating( false );
 		}

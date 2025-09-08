@@ -127,7 +127,7 @@ $allowed_html = array(
 	>
 		<?php echo wp_kses_post( block_template_part( $menu_slug ) ); ?>
 		<button
-			aria-label="<?php echo esc_attr( __( 'Close menu', 'menu-designer' ) ); ?>"
+			aria-label="<?php echo esc_attr( __( 'Close menu', 'ollie-menu-designer' ) ); ?>"
 			class="menu-container__close-button"
 			data-wp-on--click="actions.closeMenuOnClick"
 			type="button"

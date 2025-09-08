@@ -25,7 +25,7 @@ export default function TemplateHelpText( {
 	if ( hasTemplates ) {
 		return createInterpolateElement(
 			sprintf(
-				__( 'Select a menu to use as a dropdown or <create>create a new one</create> in the <editor>Site Editor</editor>.', 'menu-designer' )
+				__( 'Select a menu to use as a dropdown or <create>create a new one</create> in the <editor>Site Editor</editor>.', 'ollie-menu-designer' )
 			),
 			{
 				create: (
@@ -58,9 +58,9 @@ export default function TemplateHelpText( {
 
 	// Special case for menu templates
 	const noTemplatesMessage = templateArea === 'menu'
-		? __( 'No menus found. <a>Create your first menu</a>.', 'menu-designer' )
+		? __( 'No menus found. <a>Create your first menu</a>.', 'ollie-menu-designer' )
 		: sprintf(
-			__( 'No %s templates found. <a>Create your first template</a>.', 'menu-designer' ),
+			__( 'No %s templates found. <a>Create your first template</a>.', 'ollie-menu-designer' ),
 			templateArea
 		);
 
