@@ -1,8 +1,8 @@
-# Menu Designer
+# Ollie Menu Designer
 
 ### Create beautiful, content-rich mobile menus and dropdown menus in WordPress using the power of the block editor.
 
-[![Menu Designer Screenshot](https://olliewp.com/wp-content/uploads/2025/08/menu-designer-readme.webp)](https://olliewp.com/menu-designer)
+[![Ollie Menu Designer Screenshot](https://olliewp.com/wp-content/uploads/2025/08/menu-designer-readme.webp)](https://olliewp.com/menu-designer)
 
 [![License](https://img.shields.io/badge/license-GPL--3.0%2B-blue.svg)](https://www.gnu.org/licenses/gpl-3.0.html)
 [![WordPress](https://img.shields.io/badge/WordPress-6.0%2B-blue.svg)](https://wordpress.org/)
@@ -10,7 +10,7 @@
 
 ## Overview
 
-Create stunning, content-rich navigation menus using the WordPress block editor. [Menu Designer](https://olliewp.com/menu-designer) lets you build beautiful dropdown menus and mobile navigation with images, buttons, call-to-actions, and any other blocks – giving you the same creative freedom you have when designing your pages.
+Create stunning, content-rich navigation menus using the WordPress block editor. [Ollie Menu Designer](https://olliewp.com/menu-designer) lets you build beautiful dropdown menus and mobile navigation with images, buttons, call-to-actions, and any other blocks – giving you the same creative freedom you have when designing your pages.
 
 Menu Designer puts you in complete control of how your menus look and function. Best of all, if you're using the [free Ollie theme](https://olliewp.com/download/), you'll get access to a collection of beautifully pre-designed menu templates to help you get started quickly.
 
@@ -25,9 +25,9 @@ Menu Designer puts you in complete control of how your menus look and function. 
 
 ## Getting Started
 
-[![Menu Designer Tutorial](https://olliewp.com/wp-content/uploads/2025/08/menu-designer-tutorial-readme.webp)](https://youtu.be/UXWOafpBn38)
+[![Ollie Menu Designer Tutorial](https://olliewp.com/wp-content/uploads/2025/08/menu-designer-tutorial-readme.webp)](https://youtu.be/UXWOafpBn38)
 
-[Check out our complete video walkthrough on YouTube](https://youtu.be/UXWOafpBn38) to learn how to create beautiful dropdown menus and mobile navigation with Menu Designer.
+[Check out our complete video walkthrough on YouTube](https://youtu.be/UXWOafpBn38) to learn how to create beautiful dropdown menus and mobile navigation with Ollie Menu Designer.
 
 ### Installation
 
@@ -35,7 +35,7 @@ Menu Designer puts you in complete control of how your menus look and function. 
 3. Activate the plugin through the WordPress admin
 4. Start adding mobile menus and dropdown menus
 
-### Adding Mobile Menus with Menu Designer
+### Adding Mobile Menus with Ollie Menu Designer
 
 Watch the [full video tutorial](https://youtu.be/UXWOafpBn38) for a detailed walkthrough.
 
@@ -47,7 +47,7 @@ Watch the [full video tutorial](https://youtu.be/UXWOafpBn38) for a detailed wal
 6. Save your menu and select it in the Mobile Menu panel
 7. Customize background colors and menu icon in the mobile menu settings
 
-### Adding Dropdown Menus with Menu Designer 
+### Adding Dropdown Menus with Ollie Menu Designer
 
 Watch the [full video tutorial](https://youtu.be/UXWOafpBn38) for a detailed walkthrough.
 

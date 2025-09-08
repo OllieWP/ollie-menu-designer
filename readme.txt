@@ -1,4 +1,4 @@
-=== Menu Designer ===
+=== Ollie Menu Designer ===
 Contributors: mmcalister, patrickposner
 Donate link: https://olliewp.com
 Tags: mobile menu, dropdown menu, navigation, block, mega menu
@@ -15,7 +15,7 @@ Create custom dropdown & mobile menus using WordPress blocks. Design rich, respo
 
 https://youtu.be/UXWOafpBn38
 
-Create stunning, content-rich dropdown, mobile, and mega menus using the WordPress block editor and full site editing. [Menu Designer](https://olliewp.com/menu-designer) lets you build beautiful dropdown menus and mobile navigation with images, buttons, call-to-actions, and any other blocks – giving you the same creative freedom you have when designing your pages.
+Create stunning, content-rich dropdown, mobile, and mega menus using the WordPress block editor and full site editing. [Ollie Menu Designer](https://olliewp.com/menu-designer) lets you build beautiful dropdown menus and mobile navigation with images, buttons, call-to-actions, and any other blocks – giving you the same creative freedom you have when designing your pages.
 
 Menu Designer puts you in complete control of how your menus look and function. Best of all, if you're using the [free Ollie theme](https://olliewp.com/download/), you'll get access to a collection of beautifully pre-designed menu templates to help you get started quickly.
 
@@ -27,7 +27,7 @@ Create dropdown menus and mobile menus that match your vision using any WordPres
 * Complete creative control with any WordPress block
 
 = Mobile-First Options =
-Your menus look great on every device with Menu Designer's mobile-optimized approach. Design custom mobile menu experiences that replace default navigation with beautiful, touch-friendly interfaces. You have complete control over responsive behavior, including the ability to disable dropdowns on mobile with fallback URLs, set custom breakpoints, and ensure optimized performance across all devices.
+Your menus look great on every device with Ollie Menu Designer's mobile-optimized approach. Design custom mobile menu experiences that replace default navigation with beautiful, touch-friendly interfaces. You have complete control over responsive behavior, including the ability to disable dropdowns on mobile with fallback URLs, set custom breakpoints, and ensure optimized performance across all devices.
 
 * Fast, beautiful mobile menu designs with touch-friendly interactions
 * Choose from several pre-designed menu patterns
@@ -35,13 +35,13 @@ Your menus look great on every device with Menu Designer's mobile-optimized appr
 
 = Build faster with Ollie =
 
-Get started instantly with the free Ollie block theme, which comes packed with beautiful pre-designed menu templates and patterns built specifically for Menu Designer. Instead of starting from scratch, you'll have access to professionally-crafted mobile menus, dropdown designs, and mega menu layouts that seamlessly integrate with Ollie's design system. Simply install the theme, browse the menu pattern library, and customize the designs to match your brand – no design experience required.
+Get started instantly with the free Ollie block theme, which comes packed with beautiful pre-designed menu templates and patterns built specifically for Ollie Menu Designer. Instead of starting from scratch, you'll have access to professionally-crafted mobile menus, dropdown designs, and mega menu layouts that seamlessly integrate with Ollie's design system. Simply install the theme, browse the menu pattern library, and customize the designs to match your brand – no design experience required.
 
 Pre-designed menu templates and patterns included
 Seamless integration with Ollie's design system
 Professional designs ready to customize for your brand
 
-= Adding Mobile Menus with Menu Designer =
+= Adding Mobile Menus with Ollie Menu Designer =
 
 **We've created a [full video tutorial](https://youtu.be/UXWOafpBn38?t=150) on creating mobile menus.**
 
@@ -53,7 +53,7 @@ Professional designs ready to customize for your brand
 6. Save your menu and select it in the Mobile Menu panel
 7. Customize background colors and menu icon in the mobile menu settings
 
-= Adding Dropdowns and Mega Menus with Menu Designer =
+= Adding Dropdowns and Mega Menus with Ollie Menu Designer =
 
 **We've created a [full video tutorial](https://youtu.be/UXWOafpBn38?t=421) on creating drop down and mega menus.**
 
@@ -90,15 +90,15 @@ This ensures your pattern appears as an option when creating new menu template p
 
 = Does this work with my existing theme? =
 
-Yes! Menu Designer works with any theme that supports WordPress navigation blocks. This includes all block themes and many classic themes with navigation block support. For the best experience with pre-designed menu patterns, we recommend using the free Ollie theme. You can search for "Ollie" on your Themes page in the WordPress dashboard, or visit olliewp.com to download and learn more about the theme.
+Yes! Ollie Menu Designer works with any theme that supports WordPress navigation blocks. This includes all block themes and many classic themes with navigation block support. For the best experience with pre-designed menu patterns, we recommend using the free Ollie theme. You can search for "Ollie" on your Themes page in the WordPress dashboard, or visit olliewp.com to download and learn more about the theme.
 
 = Where can I get more templates and patterns? =
 
-Menu Designer comes with several starter patterns, but for access to hundreds of professionally-designed menu templates and patterns, check out Ollie Pro. [Ollie Pro](https://olliewp.com/pro) includes an extensive pattern library with multiple menu collections, dropdown designs, and mobile menu layouts that work seamlessly with Menu Designer.
+Ollie Menu Designer comes with several starter patterns, but for access to hundreds of professionally-designed menu templates and patterns, check out Ollie Pro. [Ollie Pro](https://olliewp.com/pro) includes an extensive pattern library with multiple menu collections, dropdown designs, and mobile menu layouts that work seamlessly with Menu Designer.
 
 = How is this different from other menu plugins? =
 
-Unlike traditional menu plugins built for classic themes, Menu Designer is built specifically for the WordPress block editor. You design menus using the same blocks you use for pages - no separate interface or complex settings screens.
+Unlike traditional menu plugins built for classic themes, Ollie Menu Designer is built specifically for the WordPress block editor. You design menus using the same blocks you use for pages - no separate interface or complex settings screens.
 
 = Can I have different menus on different pages? =
 
@@ -114,19 +114,19 @@ Yes! Since menus are built with WordPress blocks, you can copy and paste menu de
 
 = Will this conflict with other menu plugins? =
 
-Menu Designer is designed to work alongside WordPress's native navigation system. However, we recommend deactivating other menu plugins to avoid potential conflicts and ensure the best performance.
+Ollie Menu Designer is designed to work alongside WordPress's native navigation system. However, we recommend deactivating other menu plugins to avoid potential conflicts and ensure the best performance.
 
 = Is this plugin accessible? =
 
-Yes! Menu Designer follows WordPress accessibility standards with proper ARIA attributes, keyboard navigation support, and screen reader compatibility.
+Yes! Ollie Menu Designer follows WordPress accessibility standards with proper ARIA attributes, keyboard navigation support, and screen reader compatibility.
 
 = Will this slow down my website? =
 
-No. Menu Designer uses modern performance techniques including efficient loading, optimized CSS delivery, and follows WordPress best practices.
+No. Ollie Menu Designer uses modern performance techniques including efficient loading, optimized CSS delivery, and follows WordPress best practices.
 
 = Can I style menus with custom CSS? =
 
-While Menu Designer gives you extensive design control through blocks and Global Styles, you can also add custom CSS if needed. All menu elements use semantic HTML with proper CSS classes for easy targeting.
+While Ollie Menu Designer gives you extensive design control through blocks and Global Styles, you can also add custom CSS if needed. All menu elements use semantic HTML with proper CSS classes for easy targeting.
 
 == Screenshots ==
 
