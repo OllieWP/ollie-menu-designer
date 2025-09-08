@@ -10,6 +10,11 @@
  * @see https://github.com/WordPress/gutenberg/blob/trunk/docs/reference-guides/block-api/block-metadata.md#render
  */
 
+// Exit if accessed directly.
+if ( ! defined( 'ABSPATH' ) ) {
+	exit;
+}
+
 $disable_when_collapsed = $attributes['disableWhenCollapsed'] ?? false;
 $show_on_hover          = $attributes['showOnHover'] ?? false;
 $url                    = esc_url( $attributes['url'] ?? '' );
