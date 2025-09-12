@@ -35,11 +35,11 @@ Your menus look great on every device with Ollie Menu Designer's mobile-optimize
 
 = Build faster with Ollie =
 
-Get started instantly with the free Ollie block theme, which comes packed with beautiful pre-designed menu templates and patterns built specifically for Ollie Menu Designer. Instead of starting from scratch, you'll have access to professionally-crafted mobile menus, dropdown designs, and mega menu layouts that seamlessly integrate with Ollie's design system. Simply install the theme, browse the menu pattern library, and customize the designs to match your brand – no design experience required.
+Get started instantly with the [free Ollie block theme](https://wordpress.org/themes/ollie/), which comes packed with beautiful pre-designed menu templates and patterns built specifically for Ollie Menu Designer. Instead of starting from scratch, you'll have access to professionally-crafted mobile menus, dropdown designs, and mega menu layouts that seamlessly integrate with Ollie's design system. Simply install the theme, browse the menu pattern library, and customize the designs to match your brand – no design experience required.
 
-Pre-designed menu templates and patterns included
-Seamless integration with Ollie's design system
-Professional designs ready to customize for your brand
+* Pre-designed menu templates and patterns included
+* Seamless integration with Ollie's design system
+* Professional designs ready to customize for your brand
 
 = Adding Mobile Menus with Ollie Menu Designer =
 
