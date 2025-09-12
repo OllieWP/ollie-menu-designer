@@ -1,9 +1,9 @@
 # Copyright (C) 2025 Mike McAlister
-# This file is distributed under the same license as the Menu Designer plugin.
+# This file is distributed under the same license as the Ollie Menu Designer plugin.
 msgid ""
 msgstr ""
-"Project-Id-Version: Menu Designer 0.1.7\n"
-"Report-Msgid-Bugs-To: https://wordpress.org/support/plugin/menu-designer\n"
+"Project-Id-Version: Ollie Menu Designer 0.1.7\n"
+"Report-Msgid-Bugs-To: https://wordpress.org/support/plugin/ollie-menu-designer\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
 "MIME-Version: 1.0\n"
@@ -12,10 +12,10 @@ msgstr ""
 "POT-Creation-Date: 2025-08-29T04:05:10+00:00\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "X-Generator: WP-CLI 2.4.0\n"
-"X-Domain: menu-designer\n"
+"X-Domain: ollie-menu-designer\n"
 
 #. Plugin Name of the plugin
-msgid "Menu Designer"
+msgid "Ollie Menu Designer"
 msgstr ""
 
 #. Description of the plugin
@@ -38,10 +38,10 @@ msgstr ""
 msgid "Template part not found."
 msgstr ""
 
-#: menu-designer.php:51
+#: ollie-menu-designer.php:51
 msgid "Menu templates are used to create dropdown menus and mobile menus."
 msgstr ""
 
-#: menu-designer.php:53
+#: ollie-menu-designer.php:53
 msgid "Menu"
 msgstr ""
