@@ -124,6 +124,7 @@ const { state, actions } = store( 'ollie/mega-menu', {
 			const extraDelay = topSpacing * CONFIG.HOVER.DELAY_PER_PX;
 			return CONFIG.HOVER.BASE_DELAY + extraDelay;
 		},
+		isProcessingClick: false,
 	},
 	actions: {
 		// Helper to close all menu states
@@ -438,19 +439,23 @@ const { state, actions } = store( 'ollie/mega-menu', {
 		toggleMenuOnClick( event ) {
 			const context = getContext();
 			const { ref } = getElement();
-			
+
+			// Safari fix: Set flag to prevent focusout from interfering with click handling
+			state.isProcessingClick = true;
+
 			// On mobile, always toggle the menu even if it's a link with hover enabled
 			// On desktop with hover enabled and URL, allow default link behavior
 			if ( context.showOnHover && context.url && state.isDesktop ) {
 				// Let the link navigate on desktop when hover is enabled with URL
+				state.isProcessingClick = false;
 				return;
 			}
-			
+
 			// Prevent default link navigation on mobile or when no URL
 			if ( event && event.preventDefault ) {
 				event.preventDefault();
 			}
-			
+
 			// Safari won't send focus to the clicked element, so we need to manually place it: https://bugs.webkit.org/show_bug.cgi?id=22261
 			if ( window.document.activeElement !== ref ) ref.focus();
 
@@ -461,6 +466,12 @@ const { state, actions } = store( 'ollie/mega-menu', {
 				context.previousFocus = ref;
 				actions.openMenu( 'click' );
 			}
+
+			// Safari fix: Clear flag after focus events have settled
+			// This prevents focusout from closing the menu during click processing
+			setTimeout( () => {
+				state.isProcessingClick = false;
+			}, 100 );
 		},
 		closeMenuOnClick() {
 			actions.closeMenu( 'click' );
@@ -536,18 +547,34 @@ const { state, actions } = store( 'ollie/mega-menu', {
 			}
 		},
 		handleMenuFocusout( event ) {
+			// Safari fix: Ignore focusout during click processing
+			// When clicking the toggle, Safari fires focusout events that can interfere
+			if ( state.isProcessingClick ) {
+				return;
+			}
+
 			const context = getContext();
+			const { ref } = getElement();
 			const menuContainer = context.megaMenu?.querySelector(
 				'.wp-block-ollie-mega-menu__menu-container'
 			);
-			// If focus is outside menu, and in the document, close menu
+
+			// Safari fix: Don't close when focus moves to navigation UI elements
+			// These elements are part of the navigation system but outside the menu container
+			if ( event.relatedTarget ) {
+				const isNavigationUI =
+					event.relatedTarget.classList?.contains('wp-block-navigation__responsive-close') ||
+					event.relatedTarget === ref;
+
+				if ( isNavigationUI ) {
+					return;
+				}
+			}
+
+			// Close menu if focus leaves the menu container
 			// event.target === The element losing focus
 			// event.relatedTarget === The element receiving focus (if any)
-			// When focusout is outside the document,
-			// `window.document.activeElement` doesn't change.
-
-			// The event.relatedTarget is null when something outside the navigation menu is clicked. This is only necessary for Safari.
-			// TODO: There is still an issue in Safari where clicking on the menu link closes the menu. We don't want this. The toggleMenuOnClick callback should handle this.
+			// When focusout is outside the document, activeElement doesn't change
 			if (
 				event.relatedTarget === null ||
 				( ! menuContainer?.contains( event.relatedTarget ) &&
