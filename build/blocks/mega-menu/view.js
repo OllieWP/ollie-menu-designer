@@ -432,7 +432,7 @@ const {
         actions.applyMobileBackgroundColor(menu);
       }
     },
-    toggleMenuOnClick(event) {
+    toggleMenuOnClick: (0,_wordpress_interactivity__WEBPACK_IMPORTED_MODULE_0__.withSyncEvent)(event => {
       const context = (0,_wordpress_interactivity__WEBPACK_IMPORTED_MODULE_0__.getContext)();
       const {
         ref
@@ -469,7 +469,7 @@ const {
       setTimeout(() => {
         state.isProcessingClick = false;
       }, 100);
-    },
+    }),
     closeMenuOnClick() {
       actions.closeMenu('click');
       actions.closeMenu('focus');

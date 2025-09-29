@@ -6,6 +6,7 @@ import {
 	getContext,
 	getElement,
 	withScope,
+	withSyncEvent,
 } from '@wordpress/interactivity';
 
 // Configuration constants
@@ -436,7 +437,7 @@ const { state, actions } = store( 'ollie/mega-menu', {
 				actions.applyMobileBackgroundColor( menu );
 			}
 		},
-		toggleMenuOnClick( event ) {
+		toggleMenuOnClick: withSyncEvent( ( event ) => {
 			const context = getContext();
 			const { ref } = getElement();
 
@@ -472,7 +473,7 @@ const { state, actions } = store( 'ollie/mega-menu', {
 			setTimeout( () => {
 				state.isProcessingClick = false;
 			}, 100 );
-		},
+		} ),
 		closeMenuOnClick() {
 			actions.closeMenu( 'click' );
 			actions.closeMenu( 'focus' );
