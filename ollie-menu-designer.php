@@ -33,6 +33,28 @@ function omd_block_init() {
 add_action( 'init', 'omd_block_init' );
 
 /**
+ * Add multisite-compatible URLs for the block editor.
+ */
+function omd_add_multisite_urls() {
+	// Only needed in the block editor
+	$current_screen = get_current_screen();
+	if ( ! $current_screen || ! $current_screen->is_block_editor() ) {
+		return;
+	}
+
+	// Provide correct URLs for multisite environments
+	?>
+	<script>
+		window.menuDesignerData = {
+			siteUrl: <?php echo wp_json_encode( home_url() ); ?>,
+			adminUrl: <?php echo wp_json_encode( admin_url() ); ?>
+		};
+	</script>
+	<?php
+}
+add_action( 'admin_head', 'omd_add_multisite_urls' );
+
+/**
  * Adds a custom template part area for dropdown menus to the list of template part areas.
  *
  * This function introduces a new area specifically for menu templates, allowing

@@ -56,7 +56,11 @@ export default function TemplateSelector( {
 		};
 	}, [] );
 
-	const secureSiteUrl = getSecureUrl( siteUrl );
+	// Use multisite-aware URLs from localized data
+	const actualSiteUrl = window.menuDesignerData?.siteUrl || siteUrl || window.location.origin;
+	const adminUrl = window.menuDesignerData?.adminUrl || `${actualSiteUrl}/wp-admin`;
+
+	const secureSiteUrl = getSecureUrl( actualSiteUrl );
 
 	// Fetch all template parts
 	const { hasResolved, records } = useEntityRecords(
@@ -134,7 +138,7 @@ export default function TemplateSelector( {
 						<Button
 							variant="tertiary"
 							icon={ edit }
-							href={ `${ secureSiteUrl }/wp-admin/site-editor.php?p=%2Fwp_template_part%2F${ currentTheme || '' }%2F%2F${ value }&canvas=edit` }
+							href={ `${ adminUrl }/site-editor.php?p=%2Fwp_template_part%2F${ currentTheme || '' }%2F%2F${ value }&canvas=edit` }
 							target="_blank"
 						>
 							{ __( 'Edit Template', 'ollie-menu-designer' ) }

@@ -1400,7 +1400,11 @@ function TemplateSelector({
       layout: editorSettings?.__experimentalFeatures?.layout
     };
   }, []);
-  const secureSiteUrl = (0,_utils_template_utils__WEBPACK_IMPORTED_MODULE_10__.getSecureUrl)(siteUrl);
+
+  // Use multisite-aware URLs from localized data
+  const actualSiteUrl = window.menuDesignerData?.siteUrl || siteUrl || window.location.origin;
+  const adminUrl = window.menuDesignerData?.adminUrl || `${actualSiteUrl}/wp-admin`;
+  const secureSiteUrl = (0,_utils_template_utils__WEBPACK_IMPORTED_MODULE_10__.getSecureUrl)(actualSiteUrl);
 
   // Fetch all template parts
   const {
@@ -1464,7 +1468,7 @@ function TemplateSelector({
   }, (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)('Preview', 'ollie-menu-designer')), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_wordpress_components__WEBPACK_IMPORTED_MODULE_6__.Button, {
     variant: "tertiary",
     icon: _wordpress_icons__WEBPACK_IMPORTED_MODULE_12__["default"],
-    href: `${secureSiteUrl}/wp-admin/site-editor.php?p=%2Fwp_template_part%2F${currentTheme || ''}%2F%2F${value}&canvas=edit`,
+    href: `${adminUrl}/site-editor.php?p=%2Fwp_template_part%2F${currentTheme || ''}%2F%2F${value}&canvas=edit`,
     target: "_blank"
   }, (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)('Edit Template', 'ollie-menu-designer'))), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_wordpress_components__WEBPACK_IMPORTED_MODULE_6__.__experimentalSpacer, {
     marginTop: 6
