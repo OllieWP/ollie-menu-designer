@@ -12,6 +12,7 @@ import { createInterpolateElement } from '@wordpress/element';
  * @param {boolean} props.hasTemplates - Whether templates exist
  * @param {string} props.templateArea - Template area name
  * @param {string} props.siteUrl - Site URL for links
+ * @param {string} props.adminUrl - Admin URL for links
  * @param {Function} props.onCreateClick - Callback when create is clicked
  * @param {boolean} props.isCreating - Whether template is being created
  */
@@ -19,6 +20,7 @@ export default function TemplateHelpText( {
 	hasTemplates,
 	templateArea,
 	siteUrl,
+	adminUrl,
 	onCreateClick,
 	isCreating = false,
 } ) {
@@ -46,7 +48,7 @@ export default function TemplateHelpText( {
 				),
 				editor: (
 					<a
-						href={ `${ siteUrl }/wp-admin/site-editor.php?postType=wp_template_part&categoryId=${ templateArea }` }
+						href={ `${ adminUrl }site-editor.php?postType=wp_template_part&categoryId=${ templateArea }` }
 						target="_blank"
 						rel="noreferrer"
 						style={{ textDecoration: 'underline' }}

@@ -95,7 +95,7 @@ export default function useTemplateCreation( {
 				// Small delay to ensure the template is fully saved
 				setTimeout( () => {
 					// Navigate to the new template in the site editor
-					const editUrl = `${window.location.origin}/wp-admin/site-editor.php?postId=${encodeURIComponent( newTemplate.id )}&postType=wp_template_part&canvas=edit`;
+					const editUrl = `${window.menuDesignerData.adminUrl}site-editor.php?postId=${encodeURIComponent( newTemplate.id )}&postType=wp_template_part&canvas=edit`;
 					window.open( editUrl, '_blank' );
 				}, 500 );
 			} else {
