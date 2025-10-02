@@ -58,7 +58,7 @@ export default function TemplateSelector( {
 
 	// Use multisite-aware URLs from localized data
 	const actualSiteUrl = window.menuDesignerData?.siteUrl || siteUrl || window.location.origin;
-	const adminUrl = window.menuDesignerData?.adminUrl || `${actualSiteUrl}/wp-admin`;
+	const adminUrl = window.menuDesignerData?.adminUrl || `${actualSiteUrl}/wp-admin/`;
 
 	const secureSiteUrl = getSecureUrl( actualSiteUrl );
 
@@ -118,6 +118,7 @@ export default function TemplateSelector( {
 						hasTemplates={ hasTemplates }
 						templateArea={ templateArea }
 						siteUrl={ secureSiteUrl }
+						adminUrl={ adminUrl }
 						onCreateClick={ createNewTemplate }
 						isCreating={ isCreating }
 					/>
