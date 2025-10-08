@@ -136,7 +136,7 @@ const withMobileMenuControls = createHigherOrderComponent( ( BlockEdit ) => {
 											),
 											editor: (
 												<a
-													href={ `${window.location.origin}/wp-admin/site-editor.php?postType=wp_template_part&categoryId=menu` }
+													href={ `${window.menuDesignerData.adminUrl}site-editor.php?postType=wp_template_part&categoryId=menu` }
 													target="_blank"
 													rel="noreferrer"
 													style={{ textDecoration: 'underline' }}
