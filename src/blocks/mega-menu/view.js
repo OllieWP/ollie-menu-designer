@@ -460,10 +460,13 @@ const { state, actions } = store( 'ollie/mega-menu', {
 			// Safari won't send focus to the clicked element, so we need to manually place it: https://bugs.webkit.org/show_bug.cgi?id=22261
 			if ( window.document.activeElement !== ref ) ref.focus();
 
-			if ( state.menuOpenedBy.click || state.menuOpenedBy.focus ) {
+			// Only check click state for toggling (focus state is for keyboard nav)
+			if ( state.menuOpenedBy.click ) {
 				actions.closeMenu( 'click' );
 				actions.closeMenu( 'focus' );
 			} else {
+				// Close focus state and open by click
+				actions.closeMenu( 'focus' );
 				context.previousFocus = ref;
 				actions.openMenu( 'click' );
 			}
@@ -538,8 +541,17 @@ const { state, actions } = store( 'ollie/mega-menu', {
 		},
 		// ========== END HOVER FUNCTIONALITY ==========
 
+		openMenuOnFocus() {
+			// Only open if not already open
+			if ( state.isMenuOpen ) {
+				return;
+			}
+
+			// Open menu for keyboard accessibility
+			actions.openMenu( 'focus' );
+		},
 		handleMenuKeydown( event ) {
-			if ( state.menuOpenedBy.click ) {
+			if ( state.menuOpenedBy.click || state.menuOpenedBy.focus ) {
 				// If Escape close the menu.
 				if ( event?.key === 'Escape' ) {
 					actions.closeMenu( 'click' );

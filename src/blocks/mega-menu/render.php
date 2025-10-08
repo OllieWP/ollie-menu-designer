@@ -103,6 +103,7 @@ $allowed_html = array(
 		id="<?php echo esc_attr( $button_id ); ?>"
 		class="wp-block-ollie-mega-menu__toggle wp-block-navigation-item__content"
 		data-wp-on--click="actions.toggleMenuOnClick"
+		data-wp-on--focus="actions.openMenuOnFocus"
 		data-wp-on--mouseenter="actions.handleMouseEnter"
 		data-wp-on--mouseleave="actions.handleMouseLeave"
 		data-wp-bind--aria-expanded="state.isMenuOpen"
