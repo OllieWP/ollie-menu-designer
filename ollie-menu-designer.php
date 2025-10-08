@@ -20,6 +20,17 @@ if ( ! defined( 'ABSPATH' ) ) {
 }
 
 /**
+ * Load plugin textdomain.
+ *
+ * @return void
+ */
+function omd_load_textdomain() {
+	load_plugin_textdomain( 'ollie-menu-designer', false, dirname( plugin_basename( __FILE__ ) ) . '/languages' );
+}
+
+add_action( 'init', 'omd_load_textdomain' );
+
+/**
  * Registers the block using the metadata loaded from the `block.json` file.
  * Behind the scenes, it registers also all assets so they can be enqueued
  * through the block editor in the corresponding context.
@@ -52,6 +63,7 @@ function omd_add_multisite_urls() {
 	</script>
 	<?php
 }
+
 add_action( 'admin_head', 'omd_add_multisite_urls' );
 
 /**
