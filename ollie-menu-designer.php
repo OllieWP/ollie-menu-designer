@@ -37,8 +37,10 @@ add_action( 'init', 'omd_load_textdomain' );
  *
  * @see https://developer.wordpress.org/reference/functions/register_block_type/
  */
-function omd_block_init() {
-	register_block_type( __DIR__ . '/build/blocks/mega-menu' );
+if ( ! function_exists( 'omd_block_init' ) ) {
+	function omd_block_init() {
+		register_block_type( __DIR__ . '/build/blocks/mega-menu' );
+	}
 }
 
 add_action( 'init', 'omd_block_init' );
