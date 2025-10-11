@@ -31,28 +31,28 @@ export default function TemplateHelpText( {
 			),
 			{
 				create: (
-					<a
-						href="#"
-						onClick={ ( e ) => {
+					< a
+						href    = "#"
+						onClick = { ( e ) => {
 							e.preventDefault();
 							if ( ! isCreating ) {
 								onCreateClick();
 							}
-						} }
-						style={{
+							} }
+						style = {{
 							textDecoration: 'underline',
 							cursor: isCreating ? 'default' : 'pointer',
 							opacity: isCreating ? 0.6 : 1
-						}}
-					/>
+							}}
+					/ >
 				),
-				editor: (
-					<a
-						href={ `${ adminUrl }site-editor.php?postType=wp_template_part&categoryId=${ templateArea }` }
-						target="_blank"
-						rel="noreferrer"
-						style={{ textDecoration: 'underline' }}
-					/>
+			editor: (
+					< a
+						href   = { `${ adminUrl }site - editor.php ? postType = wp_template_part & categoryId = ${ templateArea }` }
+						target = "_blank"
+						rel    = "noreferrer"
+						style  = {{ textDecoration: 'underline' }}
+					/ >
 				),
 			}
 		);
@@ -70,20 +70,20 @@ export default function TemplateHelpText( {
 		noTemplatesMessage,
 		{
 			a: (
-				<a
-					href="#"
-					onClick={ ( e ) => {
+				< a
+					href    = "#"
+					onClick = { ( e ) => {
 						e.preventDefault();
 						if ( ! isCreating ) {
 							onCreateClick();
 						}
-					} }
-					style={{
+						} }
+					style = {{
 						textDecoration: 'underline',
 						cursor: isCreating ? 'default' : 'pointer',
 						opacity: isCreating ? 0.6 : 1
-					}}
-				/>
+						}}
+				/ >
 			),
 		}
 	);

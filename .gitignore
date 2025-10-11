@@ -55,3 +55,7 @@ zip
 ###############
 package-lock.json
 .editorconfig
+
+# Vendor Files #
+###############
+vendor
