@@ -18,7 +18,7 @@ import { closeSmall } from '@wordpress/icons';
  * @return {Element} Guide button and modal
  */
 export default function MenuDesignerGuide( {
-	buttonText = __( 'Ollie Menu Designer Guide', 'ollie-menu-designer' ),
+	buttonText = __( 'Menu Designer Guide', 'ollie-menu-designer' ),
 	buttonStyle = {}
 } ) {
 	const [ isGuideOpen, setIsGuideOpen ] = useState( false );
@@ -73,7 +73,7 @@ export default function MenuDesignerGuide( {
 			</HStack>
 			{ isGuideOpen && (
 				<Guide
-					contentLabel={ __( 'Ollie Menu Designer Guide', 'ollie-menu-designer' ) }
+					contentLabel={ __( 'Menu Designer Guide', 'ollie-menu-designer' ) }
 					onFinish={ () => setIsGuideOpen( false ) }
 					className="menu-designer-guide"
 					pages={ [
