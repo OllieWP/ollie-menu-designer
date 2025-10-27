@@ -1,4 +1,9 @@
 // Front-end specific styles.
+
+body:has(.wp-block-ollie-mega-menu__menu-container.menu-width-full) {
+	overflow-x: hidden;
+}
+
 .wp-block-ollie-mega-menu__menu-container {
     height: auto;
     left: -1px;
