@@ -15,6 +15,8 @@ body:has(.wp-block-ollie-mega-menu__menu-container.menu-width-full) {
   transition: opacity 0.1s linear;
   visibility: hidden;
   z-index: 2;
+  color: initial;
+  background-color: initial;
 }
 .wp-block-ollie-mega-menu__menu-container.menu-width-content {
   max-width: var(--wp--style--global--content-size);
