@@ -547,6 +547,12 @@ const { state, actions } = store( 'ollie/mega-menu', {
 				return;
 			}
 
+			// Only open on focus for desktop (keyboard navigation)
+			// On mobile, require explicit click to open
+			if ( ! state.isDesktop ) {
+				return;
+			}
+
 			// Open menu for keyboard accessibility
 			actions.openMenu( 'focus' );
 		},
