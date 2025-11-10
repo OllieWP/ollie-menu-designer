@@ -590,15 +590,31 @@ const { state, actions } = store( 'ollie/mega-menu', {
 				}
 			}
 
-			// Close menu if focus leaves the menu container
-			// event.target === The element losing focus
-			// event.relatedTarget === The element receiving focus (if any)
-			// When focusout is outside the document, activeElement doesn't change
-			if (
-				event.relatedTarget === null ||
-				( ! menuContainer?.contains( event.relatedTarget ) &&
-					event.target !== window.document.activeElement )
-			) {
+			// When relatedTarget is null, check if it's because the window lost focus
+			// or because focus truly left the menu container
+			if ( event.relatedTarget === null ) {
+				// Use a short timeout to check if the window still has focus
+				// If the window lost focus, don't close the menu
+				setTimeout( withScope( () => {
+					// If no element in the document has focus, the window likely lost focus
+					// In this case, keep the menu open
+					if ( ! document.hasFocus() ) {
+						return;
+					}
+
+					// If the document has focus but the menu container doesn't contain the active element,
+					// then focus legitimately moved elsewhere in the page - close the menu
+					if ( ! menuContainer?.contains( window.document.activeElement ) &&
+						window.document.activeElement !== ref ) {
+						actions.closeAllMenus();
+					}
+				} ), 0 );
+				return;
+			}
+
+			// Close menu if focus leaves the menu container to another element in the document
+			if ( ! menuContainer?.contains( event.relatedTarget ) &&
+				event.target !== window.document.activeElement ) {
 				actions.closeAllMenus();
 			}
 		},
