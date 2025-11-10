@@ -143,6 +143,7 @@ While Ollie Menu Designer gives you extensive design control through blocks and 
 
 = 0.2.2 =
 * Make drop down arrows consistent with default drop downs
+* Fix behavior when window loses focus
 
 = 0.2.1 =
 * Fix mega menu toggle on mobile
