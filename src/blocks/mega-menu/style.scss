@@ -44,15 +44,14 @@
                 height: inherit;
                 margin-top: 0.075em;
                 width: inherit;
-                transition: all .1s linear;
-                transform: rotate(-90deg);
+                transition: all .125s linear;
             }
         }
 
         &[aria-expanded=true] {
             .wp-block-ollie-mega-menu__toggle-icon {    
                 svg {
-                    transform: rotate(0deg);
+                    transform: rotate(180deg);
                 }
             }
 
@@ -63,4 +62,10 @@
             }
         }
     }  
+}
+
+.wp-block-navigation:has(.wp-block-ollie-mega-menu) .wp-block-navigation__submenu-icon {
+	svg {
+		transition: all .125s linear;
+	}
 }

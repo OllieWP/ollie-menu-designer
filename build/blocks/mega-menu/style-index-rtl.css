@@ -45,16 +45,19 @@
   height: inherit;
   margin-top: 0.075em;
   width: inherit;
-  transition: all 0.1s linear;
-  transform: rotate(90deg);
+  transition: all 0.125s linear;
 }
 
 .wp-block-ollie-mega-menu .wp-block-ollie-mega-menu__toggle[aria-expanded=true] .wp-block-ollie-mega-menu__toggle-icon svg {
-  transform: rotate(0deg);
+  transform: rotate(-180deg);
 }
 
 .wp-block-ollie-mega-menu .wp-block-ollie-mega-menu__toggle[aria-expanded=true] ~ .wp-block-ollie-mega-menu__menu-container {
   opacity: 1;
   overflow: visible;
   visibility: visible;
+}
+
+.wp-block-navigation:has(.wp-block-ollie-mega-menu) .wp-block-navigation__submenu-icon svg {
+  transition: all 0.125s linear;
 }

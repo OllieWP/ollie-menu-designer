@@ -4,7 +4,7 @@
  * Description:       Design stunning mobile navigation and dropdown menus in minutes using the native WordPress block editor — no coding required.
  * Requires at least: 6.5
  * Requires PHP:      7.4
- * Version:           0.2.1
+ * Version:           0.2.2
  * Author:            OllieWP Team
  * Author URI:        https://olliewp.com
  * License:           GPL-3.0-or-later
