@@ -38,6 +38,11 @@ add_action( 'init', 'omd_load_textdomain' );
  * @see https://developer.wordpress.org/reference/functions/register_block_type/
  */
 if ( ! function_exists( 'omd_block_init' ) ) {
+	/**
+	 * Register the mega menu block.
+	 *
+	 * @return void
+	 */
 	function omd_block_init() {
 		register_block_type( __DIR__ . '/build/blocks/mega-menu' );
 	}
@@ -49,13 +54,13 @@ add_action( 'init', 'omd_block_init' );
  * Add multisite-compatible URLs for the block editor.
  */
 function omd_add_multisite_urls() {
-	// Only needed in the block editor
+	// Only needed in the block editor.
 	$current_screen = get_current_screen();
 	if ( ! $current_screen || ! $current_screen->is_block_editor() ) {
 		return;
 	}
 
-	// Provide correct URLs for multisite environments
+	// Provide correct URLs for multisite environments.
 	?>
 	<script>
 		window.menuDesignerData = {
@@ -95,10 +100,13 @@ function omd_template_part_areas( array $areas ) {
 
 add_filter( 'default_wp_template_part_areas', 'omd_template_part_areas' );
 
-add_action( 'plugins_loaded', function () {
-	// Include preview functionality
-	require_once plugin_dir_path( __FILE__ ) . 'includes/omd-preview.php';
+add_action(
+	'plugins_loaded',
+	function () {
+		// Include preview functionality.
+		require_once plugin_dir_path( __FILE__ ) . 'includes/omd-preview.php';
 
-// Include mobile menu functionality
-	require_once plugin_dir_path( __FILE__ ) . 'includes/omd-mobile-menu-filter.php';
-} );
+		// Include mobile menu functionality.
+		require_once plugin_dir_path( __FILE__ ) . 'includes/omd-mobile-menu-filter.php';
+	}
+);
