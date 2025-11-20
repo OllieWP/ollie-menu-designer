@@ -101,6 +101,8 @@ const menuUtils = {
 
 // Track the currently open hover menu globally
 let currentHoverMenu = null;
+// Track the currently open click menu globally
+let currentClickMenu = null;
 
 const { state, actions } = store( 'ollie/mega-menu', {
 	state: {
@@ -460,6 +462,12 @@ const { state, actions } = store( 'ollie/mega-menu', {
 			// Safari won't send focus to the clicked element, so we need to manually place it: https://bugs.webkit.org/show_bug.cgi?id=22261
 			if ( window.document.activeElement !== ref ) ref.focus();
 
+			// Close any other currently open click menu before toggling this one
+			if ( currentClickMenu && currentClickMenu !== context ) {
+				currentClickMenu.menuOpenedBy.click = false;
+				currentClickMenu.menuOpenedBy.focus = false;
+			}
+
 			// Only check click state for toggling (focus state is for keyboard nav)
 			if ( state.menuOpenedBy.click ) {
 				actions.closeMenu( 'click' );
@@ -469,6 +477,8 @@ const { state, actions } = store( 'ollie/mega-menu', {
 				actions.closeMenu( 'focus' );
 				context.previousFocus = ref;
 				actions.openMenu( 'click' );
+				// Track this as the current click menu
+				currentClickMenu = context;
 			}
 
 			// Safari fix: Clear flag after focus events have settled
@@ -631,14 +641,18 @@ const { state, actions } = store( 'ollie/mega-menu', {
 				if ( currentHoverMenu === context ) {
 					currentHoverMenu = null;
 				}
-				
+				// Clear the global click menu reference if this was the click menu
+				if ( currentClickMenu === context ) {
+					currentClickMenu = null;
+				}
+
 				if (
 					context.megaMenu?.contains( window.document.activeElement )
 				) {
 					context.previousFocus?.focus();
 				}
 				context.previousFocus = null;
-				
+
 				// Reset justification swap flag when menu closes
 				if ( context.megaMenu ) {
 					const menu = menuUtils.getMenu( context.megaMenu );
@@ -646,7 +660,7 @@ const { state, actions } = store( 'ollie/mega-menu', {
 						delete menu.dataset.justificationSwapped;
 					}
 				}
-				
+
 				context.megaMenu = null;
 			}
 		},
