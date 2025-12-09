@@ -13,7 +13,7 @@ body:has(.wp-block-ollie-mega-menu__menu-container.menu-width-full) {
     top: 40px;
     transition: opacity .1s linear;
     visibility: hidden;
-    z-index: 2;
+    z-index: 100;
 	color: initial;
     background-color: initial;
 

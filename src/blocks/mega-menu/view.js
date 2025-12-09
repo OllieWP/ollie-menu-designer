@@ -683,8 +683,22 @@ const { state, actions } = store( 'ollie/mega-menu', {
 		},
 		// Initialize and adjust menu on component ready
 		initMenuLayout() {
-			// Adjust this specific menu
-			actions.adjustMegaMenu();
+			// Wait for page to fully load before calculating position
+			// This prevents miscalculation due to layout shifts during page load
+			// (e.g., images loading, resource fetching, CSS settling)
+			if ( document.readyState === 'complete' ) {
+				// Page already loaded, calculate immediately
+				actions.adjustMegaMenu();
+			} else {
+				// Wait for load event to ensure stable layout
+				window.addEventListener(
+					'load',
+					withScope( () => {
+						actions.adjustMegaMenu();
+					} ),
+					{ once: true }
+				);
+			}
 		},
 	},
 } );
