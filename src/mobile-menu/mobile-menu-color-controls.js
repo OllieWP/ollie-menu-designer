@@ -17,34 +17,34 @@ const MobileMenuColorControls = ({
 	setMobileIconBackgroundColor,
 	setMobileIconColor,
 }) => {
-	const colorSettings = [
+	const colorSettings       = [
 		{
-			value: mobileMenuBackgroundColor?.color,
+			value: mobileMenuBackgroundColor ? .color,
 			onChange: setMobileMenuBackgroundColor,
 			label: __( 'Mobile menu background', 'ollie-menu-designer' ),
 			resetAllFilter: () => ({
 				mobileMenuBackgroundColor: undefined,
 				customMobileMenuBackgroundColor: undefined,
 			}),
-		},
+	},
 		{
-			value: mobileIconBackgroundColor?.color,
+			value: mobileIconBackgroundColor ? .color,
 			onChange: setMobileIconBackgroundColor,
 			label: __( 'Mobile toggle background', 'ollie-menu-designer' ),
 			resetAllFilter: () => ({
 				mobileIconBackgroundColor: undefined,
 				customMobileIconBackgroundColor: undefined,
 			}),
-		},
+	},
 		{
-			value: mobileIconColor?.color,
+			value: mobileIconColor ? .color,
 			onChange: setMobileIconColor,
 			label: __( 'Mobile toggle icon', 'ollie-menu-designer' ),
 			resetAllFilter: () => ({
 				mobileIconColor: undefined,
 				customMobileIconColor: undefined,
 			}),
-		},
+	},
 	];
 
 	const colorGradientSettings = useMultipleOriginColorsAndGradients();
@@ -54,13 +54,13 @@ const MobileMenuColorControls = ({
 	}
 
 	return (
-		<>
+		< >
 			{ colorSettings.map(
 				( { onChange, label, value, resetAllFilter } ) => (
-					<ColorGradientSettingsDropdown
-						key={ `mobile-menu-color-${ label }` }
+				< ColorGradientSettingsDropdown
+						key      = { `mobile - menu - color - ${ label }` }
 						__experimentalIsRenderedInSidebar
-						settings={ [
+						settings = { [
 							{
 								colorValue: value,
 								label,
@@ -70,13 +70,13 @@ const MobileMenuColorControls = ({
 								enableAlpha: true,
 								clearable: true,
 							},
-						] }
-						panelId={ clientId }
+							] }
+						panelId  = { clientId }
 						{ ...colorGradientSettings }
-					/>
+					/ >
 				)
 			) }
-		</>
+		< / >
 	);
 };
 
