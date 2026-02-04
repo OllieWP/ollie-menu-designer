@@ -40,12 +40,29 @@ const withMobileMenuControls = createHigherOrderComponent( ( BlockEdit ) => {
 			mobileMenuBreakpoint
 		} = attributes;
 
+		// Define slug prefixes that indicate menu templates
+		// This helps find templates that lost their area during theme export
+		const menuSlugPrefixes = [
+			'dropdown-menu',
+			'mobile-menu',
+			'mega-menu',
+			'menu-',
+		];
+
 		// Check if menu templates are available
+		// Fetch all templates to allow fallback matching by slug
 		const { records: templates, isResolving } = useEntityRecords( 'postType', 'wp_template_part', {
 			per_page: -1,
-			area: 'menu',
 		} );
-		const hasTemplates = !isResolving && templates && templates.length > 0;
+
+		// Filter templates by area with fallback to slug-based matching
+		const menuTemplates = templates
+			? templates.filter( ( item ) =>
+				item.area === 'menu' ||
+				menuSlugPrefixes.some( ( prefix ) => item.slug.startsWith( prefix ) )
+			)
+			: [];
+		const hasTemplates = !isResolving && menuTemplates.length > 0;
 
 		// Get the active theme slug for creating new template parts
 		const themeSlug = useSelect( ( select ) => {
