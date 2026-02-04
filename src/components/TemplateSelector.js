@@ -69,10 +69,32 @@ export default function TemplateSelector( {
 		{ per_page: -1 }
 	);
 
-	// Filter templates by area
+	// Define slug prefixes that indicate menu templates
+	// This helps find templates that lost their area during theme export
+	const menuSlugPrefixes = [
+		'dropdown-menu',
+		'mobile-menu',
+		'mega-menu',
+		'menu-',
+	];
+
+	// Filter templates by area, with fallback to slug-based matching
+	// This ensures templates are still found if their area was lost during theme export
 	const templateOptions = hasResolved && records
 		? records
-			.filter( ( item ) => item.area === templateArea )
+			.filter( ( item ) => {
+				// Primary match: correct area
+				if ( item.area === templateArea ) {
+					return true;
+				}
+				// Fallback for 'menu' area: match by slug prefix
+				if ( templateArea === 'menu' ) {
+					return menuSlugPrefixes.some( ( prefix ) =>
+						item.slug.startsWith( prefix )
+					);
+				}
+				return false;
+			} )
 			.map( ( item ) => ( {
 				label: decodeEntities( item.title.rendered ),
 				value: item.slug,
