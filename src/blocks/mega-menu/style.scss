@@ -49,7 +49,7 @@
         }
 
         &[aria-expanded=true] {
-            .wp-block-ollie-mega-menu__toggle-icon {    
+            .wp-block-ollie-mega-menu__toggle-icon {
                 svg {
                     transform: rotate(180deg);
                 }
@@ -59,6 +59,8 @@
                 opacity: 1;
                 overflow: visible;
                 visibility: visible;
+                // Opening transition: immediate visibility, fast fade-in
+                transition: opacity 0.15s ease-in, visibility 0s linear 0s;
             }
         }
     }  
