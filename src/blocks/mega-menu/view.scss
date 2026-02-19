@@ -11,8 +11,9 @@ body:has(.wp-block-ollie-mega-menu__menu-container.menu-width-full) {
     overflow: hidden;
     position: absolute;
     top: 40px;
-    // Closing transition: delay the fade-out to allow new menu to appear first
-    transition: opacity 0.15s ease-out 0.1s, visibility 0s linear 0.25s;
+    // Closing transition: delay fade-out significantly so new menu appears first
+    // The new menu fades in over 0.15s, so we wait 0.2s before starting to fade out
+    transition: opacity 0.1s ease-out 0.2s, visibility 0s linear 0.3s;
     visibility: hidden;
     z-index: 100;
 	color: initial;
