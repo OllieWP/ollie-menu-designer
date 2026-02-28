@@ -102,3 +102,60 @@ add_action( 'plugins_loaded', function () {
 // Include mobile menu functionality
 	require_once plugin_dir_path( __FILE__ ) . 'includes/omd-mobile-menu-filter.php';
 } );
+
+/**
+ * Display admin notice for Ollie Pro.
+ *
+ * @return void
+ */
+function omd_admin_notice_ollie_pro() {
+	// Only show to users who can manage options.
+	if ( ! current_user_can( 'manage_options' ) ) {
+		return;
+	}
+
+	// Check if notice has been dismissed.
+	if ( get_user_meta( get_current_user_id(), 'omd_dismissed_ollie_pro_notice', true ) ) {
+		return;
+	}
+
+	?>
+	<div class="notice notice-info is-dismissible omd-ollie-pro-notice">
+		<p>
+			<strong><?php esc_html_e( 'Love Menu Designer?', 'ollie-menu-designer' ); ?></strong>
+			<?php esc_html_e( 'Unlock even more powerful features with Ollie Pro — premium blocks, patterns, and powerful editor tools for WordPress.', 'ollie-menu-designer' ); ?>
+			<a href="https://olliewp.com/pro" target="_blank" rel="noopener noreferrer"><?php esc_html_e( 'Learn more →', 'ollie-menu-designer' ); ?></a>
+		</p>
+	</div>
+	<script>
+		jQuery( function( $ ) {
+			$( document ).on( 'click', '.omd-ollie-pro-notice .notice-dismiss', function() {
+				$.post( ajaxurl, {
+					action: 'omd_dismiss_ollie_pro_notice',
+					nonce: '<?php echo esc_js( wp_create_nonce( 'omd_dismiss_notice' ) ); ?>'
+				} );
+			} );
+		} );
+	</script>
+	<?php
+}
+
+add_action( 'admin_notices', 'omd_admin_notice_ollie_pro' );
+
+/**
+ * Handle AJAX request to dismiss the Ollie Pro notice.
+ *
+ * @return void
+ */
+function omd_dismiss_ollie_pro_notice() {
+	check_ajax_referer( 'omd_dismiss_notice', 'nonce' );
+
+	if ( ! current_user_can( 'manage_options' ) ) {
+		wp_die( -1 );
+	}
+
+	update_user_meta( get_current_user_id(), 'omd_dismissed_ollie_pro_notice', true );
+	wp_die();
+}
+
+add_action( 'wp_ajax_omd_dismiss_ollie_pro_notice', 'omd_dismiss_ollie_pro_notice' );
