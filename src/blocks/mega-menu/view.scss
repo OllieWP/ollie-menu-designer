@@ -10,7 +10,7 @@ body:has(.wp-block-ollie-mega-menu__menu-container.menu-width-full) {
     opacity: 0;
     overflow: hidden;
     position: absolute;
-    top: 40px;
+    top: 0;
     // Closing transition: delay fade-out significantly so new menu appears first
     // The new menu fades in over 0.15s, so we wait 0.2s before starting to fade out
     transition: opacity 0.1s ease-out 0.2s, visibility 0s linear 0.3s;
@@ -40,16 +40,16 @@ body:has(.wp-block-ollie-mega-menu__menu-container.menu-width-full) {
         backdrop-filter: blur(16px) saturate(180%);
         background-color: #ffffffba;
         border: none;
-        border-radius: 999999px;
+        border-radius: 3px;
         cursor: pointer;
         display: flex;
         justify-content: center;
         opacity: 0;
         padding: 4px;
         position: absolute;
-        right: 12px;
+        right: var(--wp--preset--spacing--medium);
         text-align: center;
-        top: 12px;
+        top: var(--wp--preset--spacing--medium);
         transition: opacity .2s ease;
         z-index: 100;
 
@@ -145,9 +145,5 @@ body:has(.wp-block-ollie-mega-menu__menu-container.menu-width-full) {
 		opacity: 1;
 		overflow-x: hidden !important;
 		overflow-y: scroll !important;
-	}
-
-	.admin-bar & .wp-block-ollie-mega-menu__menu-container {
-		top: 46px !important;
 	}
 }
