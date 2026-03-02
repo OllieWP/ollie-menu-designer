@@ -162,7 +162,7 @@ export default function TemplatePreviewModal( {
 				{ isIframeLoading && <LoadingIndicator /> }
 				<iframe
 					key={ templateSlug }
-					src={ `${ siteUrl }/?menu_designer_preview=${ templateSlug }` }
+					src={ `${ siteUrl }/?menu_designer_preview=${ templateSlug }&preview_token=${ window.menuDesignerData?.previewToken || '' }` }
 					style={ {
 						width: '100%',
 						height: '100%',

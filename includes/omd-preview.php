@@ -18,9 +18,23 @@ function menu_designer_handle_preview() {
 		return;
 	}
 
-	// Check if user can edit theme options
-	if ( ! current_user_can( 'edit_theme_options' ) ) {
-		wp_die( esc_html__( 'You do not have permission to preview menus.', 'ollie-menu-designer' ) );
+	// Check for preview token (for iframe requests where cookies may not be sent)
+	// phpcs:ignore WordPress.Security.NonceVerification.Recommended -- Token is verified below
+	$preview_token = isset( $_GET['preview_token'] ) ? sanitize_text_field( wp_unslash( $_GET['preview_token'] ) ) : '';
+	$token_valid   = false;
+
+	if ( $preview_token ) {
+		$token_user_id = get_transient( 'omd_preview_token_' . $preview_token );
+		if ( $token_user_id ) {
+			$token_valid = true;
+		}
+	}
+
+	// If token is not valid, fall back to capability check
+	if ( ! $token_valid ) {
+		if ( ! current_user_can( 'edit_theme_options' ) && ! current_user_can( 'manage_options' ) ) {
+			wp_die( esc_html__( 'You do not have permission to preview menus.', 'ollie-menu-designer' ) );
+		}
 	}
 
 	// Get the template part slug
