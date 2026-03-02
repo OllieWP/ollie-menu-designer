@@ -114,6 +114,11 @@ add_action( 'plugins_loaded', function () {
  * @return void
  */
 function omd_admin_notice_ollie_pro() {
+	// Don't show if Ollie Pro is already active.
+	if ( defined( 'OLPO_VERSION' ) ) {
+		return;
+	}
+
 	// Only show to users who can manage options.
 	if ( ! current_user_can( 'manage_options' ) ) {
 		return;
