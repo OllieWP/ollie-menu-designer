@@ -6,7 +6,7 @@ body:has(.wp-block-ollie-mega-menu__menu-container.menu-width-full) {
 
 .wp-block-ollie-mega-menu__menu-container {
     height: auto;
-    left: -1px;
+    left: 0;
     opacity: 0;
     overflow: hidden;
     position: absolute;
@@ -89,13 +89,13 @@ body:has(.wp-block-ollie-mega-menu__menu-container.menu-width-full) {
 .wp-block-navigation { 
     .wp-block-ollie-mega-menu__menu-container {
         &.menu-justified-left {
-            left: -1px;
+            left: 0;
             right: unset;
         }
 
         &.menu-justified-right {
             left: unset;
-            right: -1px;
+            right: 0;
         }
 
         &.menu-justified-center {
