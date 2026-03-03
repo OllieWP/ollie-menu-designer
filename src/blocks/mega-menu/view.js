@@ -301,11 +301,18 @@ const { state, actions } = store( 'ollie/mega-menu', {
 
 			// Step 2: Handle positioning based on width type and justification
 
-			// Wide/Full menus - always center on page when justified center
-			if (
-				menuUtils.hasWidthClass( menu, 'wide' ) ||
-				menuUtils.hasWidthClass( menu, 'full' )
-			) {
+			// Full-width menus - position at viewport left edge with calculated width
+			if ( menuUtils.hasWidthClass( menu, 'full' ) ) {
+				// Use window.innerWidth instead of 100vw to avoid scrollbar issues
+				menu.style.width = `${ windowSpace }px`;
+				menu.style.maxWidth = `${ windowSpace }px`;
+				// Calculate offset needed to reach viewport left edge
+				menu.style.left = `${ -menuRect.left }px`;
+				return;
+			}
+
+			// Wide menus - center on page when justified center
+			if ( menuUtils.hasWidthClass( menu, 'wide' ) ) {
 				if ( justification === 'center' ) {
 					// Center the menu on the screen
 					const screenCenter = windowSpace / 2;
@@ -316,7 +323,7 @@ const { state, actions } = store( 'ollie/mega-menu', {
 					const newLeft = parseFloat( menu.style.left || 0 ) + offset;
 					menu.style.left = `${ newLeft }px`;
 				}
-				return; // Wide/full menus don't need edge detection
+				return; // Wide menus don't need edge detection
 			}
 
 			// Content/Custom menus - handle centering if needed
