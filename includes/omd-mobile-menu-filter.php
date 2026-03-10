@@ -137,7 +137,7 @@ function inject_mobile_menu_content( $content, $mobile_menu_slug ) {
 	// Render the mobile menu template part
 	ob_start();
 	block_template_part( $mobile_menu_slug );
-	$mobile_menu_content = ob_get_clean();
+	$mobile_menu_content = do_shortcode( ob_get_clean() );
 	
 	if ( empty( $mobile_menu_content ) ) {
 		return $content;

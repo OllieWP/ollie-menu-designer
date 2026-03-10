@@ -131,7 +131,11 @@ $allowed_html = array(
 		role="group"
 		aria-labelledby="<?php echo esc_attr( $button_id ); ?>"
 	>
-		<?php block_template_part( $menu_slug ); ?>
+		<?php
+		ob_start();
+		block_template_part( $menu_slug );
+		echo do_shortcode( ob_get_clean() );
+		?>
 		<button
 			aria-label="<?php echo esc_attr( __( 'Close menu', 'ollie-menu-designer' ) ); ?>"
 			class="menu-container__close-button"
