@@ -103,6 +103,8 @@ const menuUtils = {
 let currentHoverMenu = null;
 // Track the currently open click menu globally
 let currentClickMenu = null;
+// Track resize debounce timers per element
+const resizeTimers = new WeakMap();
 
 const { state, actions } = store( 'ollie/mega-menu', {
 	state: {
@@ -245,6 +247,14 @@ const { state, actions } = store( 'ollie/mega-menu', {
 				leftOffset: navBlock.getBoundingClientRect().left,
 				leftSpace: ( windowSpace - originalMenuWidth ) / 2,
 			};
+		},
+		// Reset inline positioning styles so getBoundingClientRect()
+		// returns the element's natural CSS position. Called before
+		// recalculating on resize to prevent compound offset drift.
+		resetMenuPositionStyles( menu ) {
+			menu.style.left = '';
+			menu.style.width = '';
+			menu.style.maxWidth = '';
 		},
 		// Adjust a single dropdown menu
 		adjustMegaMenu() {
@@ -435,16 +445,36 @@ const { state, actions } = store( 'ollie/mega-menu', {
 				actions.closeMenu( 'hover' );
 			}
 
-			// Reset justification swap flag on resize to allow re-evaluation
-			delete menu.dataset.justificationSwapped;
-
-			// Re-apply full positioning logic on resize
-			actions.adjustMegaMenu();
-
-			// Reapply mobile background color on resize
-			if ( state.isMenuOpen ) {
-				actions.applyMobileBackgroundColor( menu );
+			// Debounce the positioning recalculation to prevent
+			// flickering during continuous resize events.
+			const existingTimer = resizeTimers.get( ref );
+			if ( existingTimer ) {
+				cancelAnimationFrame( existingTimer );
 			}
+
+			resizeTimers.set(
+				ref,
+				requestAnimationFrame(
+					withScope( () => {
+						// Reset justification swap flag on resize to allow re-evaluation
+						delete menu.dataset.justificationSwapped;
+
+						// Reset inline positioning so recalculation starts
+						// from the element's natural CSS position.
+						actions.resetMenuPositionStyles( menu );
+
+						// Re-apply full positioning logic on resize
+						actions.adjustMegaMenu();
+
+						// Reapply mobile background color on resize
+						if ( state.isMenuOpen ) {
+							actions.applyMobileBackgroundColor( menu );
+						}
+
+						resizeTimers.delete( ref );
+					} )
+				)
+			);
 		},
 		toggleMenuOnClick: withSyncEvent( ( event ) => {
 			const context = getContext();

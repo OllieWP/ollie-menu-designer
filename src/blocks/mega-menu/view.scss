@@ -56,6 +56,10 @@ body:has(.wp-block-ollie-mega-menu__menu-container.menu-width-full) {
         &:focus {
             opacity: 1;
         }
+
+		svg path {
+			fill: #000;
+		}
     }
 
     // Show the close button when the mega menu is hovered.
