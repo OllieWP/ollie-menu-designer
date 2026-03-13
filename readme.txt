@@ -143,8 +143,9 @@ While Ollie Menu Designer gives you extensive design control through blocks and 
 
 = 0.2.8 =
 * Fix close icon in mega menu
-* Improve mega menu resizing 
-* Add default top spacing to mega menu 
+* Improve mega menu resizing
+* Add default top spacing to mega menu
+* Add current-menu-item class for active page highlighting
 
 = 0.2.7 =
 * Fix full-width dropdown menu overflow causing horizontal scrollbar
