@@ -41,6 +41,15 @@ if ( ! $label || ! $menu_slug ) {
 $classes  = $disable_when_collapsed ? 'disable-menu-when-collapsed ' : '';
 $classes .= $collapsed_url ? 'has-collapsed-link ' : '';
 
+// Add current-menu-item class if the menu item URL matches the current page.
+if ( $url ) {
+	$current_url = untrailingslashit( home_url( $_SERVER['REQUEST_URI'] ?? '' ) );
+	$menu_url    = untrailingslashit( $url );
+	if ( $current_url === $menu_url ) {
+		$classes .= 'current-menu-item ';
+	}
+}
+
 $wrapper_attributes = get_block_wrapper_attributes(
 	array( 'class' => $classes . 'wp-block-navigation-item' )
 );
