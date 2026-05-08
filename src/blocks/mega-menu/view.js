@@ -16,8 +16,9 @@ const CONFIG = {
 
 	// Hover behavior
 	HOVER: {
-		BASE_DELAY: 300, // ms - Base hover intent delay
-		DELAY_PER_PX: 2, // ms - Additional delay per pixel of top spacing
+		OPEN_DELAY: 150, // ms - Hover intent delay before opening
+		CLOSE_DELAY: 300, // ms - Delay before closing on mouse leave
+		DELAY_PER_PX: 2, // ms - Additional close delay per pixel of top spacing
 	},
 
 	// Menu dimensions
@@ -127,7 +128,7 @@ const { state, actions } = store( 'ollie/mega-menu', {
 			const topSpacing = context.topSpacing || 0;
 			// Add delay based on top spacing to give users more time
 			const extraDelay = topSpacing * CONFIG.HOVER.DELAY_PER_PX;
-			return CONFIG.HOVER.BASE_DELAY + extraDelay;
+			return CONFIG.HOVER.CLOSE_DELAY + extraDelay;
 		},
 		isProcessingClick: false,
 	},
@@ -561,7 +562,7 @@ const { state, actions } = store( 'ollie/mega-menu', {
 					// Don't interfere with click-opened menus
 					actions.openMenu( 'hover' );
 				}
-			}, CONFIG.HOVER.BASE_DELAY );
+			}, CONFIG.HOVER.OPEN_DELAY );
 		},
 		// Handle mouse leave from toggle button
 		handleMouseLeave() {
@@ -584,7 +585,7 @@ const { state, actions } = store( 'ollie/mega-menu', {
 
 			actions.setHoverTimeout( () => {
 				actions.closeMenu( 'hover' );
-			}, CONFIG.HOVER.BASE_DELAY ); // Use base delay when leaving menu
+			}, CONFIG.HOVER.CLOSE_DELAY ); // Use base delay when leaving menu
 		},
 		// ========== END HOVER FUNCTIONALITY ==========
 
