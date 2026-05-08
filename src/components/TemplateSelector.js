@@ -69,10 +69,11 @@ export default function TemplateSelector( {
 		{ per_page: -1 }
 	);
 
-	// Filter templates by area
+	// Filter templates by area, including uncategorized parts (which may have
+	// lost their area during theme export/import).
 	const templateOptions = hasResolved && records
 		? records
-			.filter( ( item ) => item.area === templateArea )
+			.filter( ( item ) => item.area === templateArea || item.area === 'uncategorized' || ! item.area )
 			.map( ( item ) => ( {
 				label: decodeEntities( item.title.rendered ),
 				value: item.slug,

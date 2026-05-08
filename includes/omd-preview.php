@@ -57,6 +57,14 @@ function menu_designer_handle_preview() {
 		}
 	}, 20 );
 
+	// Render blocks before wp_head() so that script modules (like
+	// @wordpress/interactivity) are enqueued in time for the import map.
+	$template_part = get_block_template( get_stylesheet() . '//' . $menu_slug, 'wp_template_part' );
+
+	if ( $template_part ) {
+		$preview_content = do_blocks( $template_part->content );
+	}
+
 	// Set up a minimal HTML page for preview
 	?>
 	<!DOCTYPE html>
@@ -84,17 +92,10 @@ function menu_designer_handle_preview() {
 	<body <?php body_class( 'mega-menu-preview' ); ?>>
 		<div class="mega-menu-preview-wrapper">
 			<?php
-			// Get the template part content
-			$template_part = get_block_template( get_stylesheet() . '//' . $menu_slug, 'wp_template_part' );
-
 			if ( ! $template_part ) {
 				echo '<p>' . esc_html__( 'Template part not found.', 'ollie-menu-designer' ) . '</p>';
 			} else {
-				// Use the content property which contains the raw block content
-				$content = $template_part->content;
-
-				// Render the blocks - this will process all blocks including inline styles
-				echo do_blocks( $content ); // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped -- Block content is properly escaped by do_blocks
+				echo $preview_content; // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped -- Block content is properly escaped by do_blocks
 			}
 			?>
 		</div>
