@@ -15,6 +15,7 @@ import { useDispatch } from '@wordpress/data';
  * @param {Array} options.existingTemplates - Array of existing templates to check for duplicates
  * @param {string} options.currentTheme - Current theme slug
  * @param {Function} options.onSuccess - Callback when template is created successfully
+ * @param {Function|undefined} options.onNavigateToEntityRecord - Site Editor navigation callback (undefined outside Site Editor)
  * @returns {Object} Object containing createTemplate function and isCreating state
  */
 export default function useTemplateCreation( {
@@ -24,6 +25,7 @@ export default function useTemplateCreation( {
 	existingTemplates = [],
 	currentTheme,
 	onSuccess = () => {},
+	onNavigateToEntityRecord,
 } ) {
 	const [ isCreating, setIsCreating ] = useState( false );
 	const { saveEntityRecord } = useDispatch( 'core' );
@@ -92,12 +94,17 @@ export default function useTemplateCreation( {
 				// Call success callback with the new template
 				onSuccess( newTemplate );
 
-				// Small delay to ensure the template is fully saved
-				setTimeout( () => {
-					// Navigate to the new template in the site editor using theme//slug format
-					const editUrl = `${window.menuDesignerData.adminUrl}site-editor.php?p=%2Fwp_template_part%2F${ encodeURIComponent( currentTheme || 'theme' ) }%2F%2F${ encodeURIComponent( slug ) }&canvas=edit`;
+				if ( onNavigateToEntityRecord ) {
+					// Drill into the new template part within the Site Editor
+					onNavigateToEntityRecord( {
+						postType: 'wp_template_part',
+						postId: newTemplate.id,
+					} );
+				} else {
+					// Fallback: open in a new tab (e.g., when in Post Editor)
+					const editUrl = `${ window.menuDesignerData.adminUrl }site-editor.php?p=%2Fwp_template_part%2F${ encodeURIComponent( currentTheme || 'theme' ) }%2F%2F${ encodeURIComponent( newTemplate.slug ) }&canvas=edit`;
 					window.open( editUrl, '_blank' );
-				}, 500 );
+				}
 			} else {
 				console.error( 'Template was created but no ID was returned' );
 			}
