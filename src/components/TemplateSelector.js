@@ -46,13 +46,14 @@ export default function TemplateSelector( {
 	const [ isPreviewOpen, setIsPreviewOpen ] = useState( false );
 
 	// Get site data and editor settings
-	const { siteUrl, currentTheme, layout } = useSelect( ( select ) => {
+	const { siteUrl, currentTheme, layout, onNavigateToEntityRecord } = useSelect( ( select ) => {
 		const { getSite, getCurrentTheme } = select( 'core' );
 		const editorSettings = select( 'core/editor' ).getEditorSettings();
 		return {
 			siteUrl: getSite()?.url,
 			currentTheme: getCurrentTheme()?.stylesheet,
 			layout: editorSettings?.__experimentalFeatures?.layout,
+			onNavigateToEntityRecord: editorSettings?.onNavigateToEntityRecord,
 		};
 	}, [] );
 
@@ -83,6 +84,11 @@ export default function TemplateSelector( {
 	const hasTemplates = templateOptions.length > 0;
 	const isValidSelection = ! value || templateOptions.some( ( option ) => option.value === value );
 
+	// Look up the full record for the selected template (needed for drill-in navigation by ID)
+	const selectedRecord = value && records
+		? records.find( ( item ) => item.slug === value )
+		: null;
+
 	// Use the shared template creation hook
 	const baseSlug = templateArea === 'menu' ? 'dropdown-menu' : templateArea;
 	const baseTitle = templateArea === 'menu' ? __( 'Dropdown Menu', 'ollie-menu-designer' ) : templateArea;
@@ -93,6 +99,7 @@ export default function TemplateSelector( {
 		baseTitle,
 		existingTemplates: records,
 		currentTheme,
+		onNavigateToEntityRecord,
 		onSuccess: ( newTemplate ) => {
 			// Update the selected value when template is created
 			onChange( newTemplate.slug );
@@ -137,14 +144,27 @@ export default function TemplateSelector( {
 						>
 							{ __( 'Preview', 'ollie-menu-designer' ) }
 						</Button>
-						<Button
-							variant="tertiary"
-							icon={ edit }
-							href={ `${ adminUrl }/site-editor.php?p=%2Fwp_template_part%2F${ currentTheme || '' }%2F%2F${ value }&canvas=edit` }
-							target="_blank"
-						>
-							{ __( 'Edit Template', 'ollie-menu-designer' ) }
-						</Button>
+						{ onNavigateToEntityRecord && selectedRecord ? (
+							<Button
+								variant="tertiary"
+								icon={ edit }
+								onClick={ () => onNavigateToEntityRecord( {
+									postType: 'wp_template_part',
+									postId: selectedRecord.id,
+								} ) }
+							>
+								{ __( 'Edit Template', 'ollie-menu-designer' ) }
+							</Button>
+						) : (
+							<Button
+								variant="tertiary"
+								icon={ edit }
+								href={ `${ adminUrl }/site-editor.php?p=%2Fwp_template_part%2F${ currentTheme || '' }%2F%2F${ value }&canvas=edit` }
+								target="_blank"
+							>
+								{ __( 'Edit Template', 'ollie-menu-designer' ) }
+							</Button>
+						) }
 					</HStack>
 					<Spacer marginTop={ 6 } />
 				</>
