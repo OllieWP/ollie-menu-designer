@@ -142,19 +142,8 @@ $allowed_html = array(
 	>
 		<?php
 		ob_start();
-		$omd_prev_error = error_reporting( 0 );
-		try {
-			block_template_part( $menu_slug );
-		} catch ( \Throwable $e ) {
-			// Silently fail — the template part content may reference
-			// navigation posts that don't exist on this site.
-		}
-		error_reporting( $omd_prev_error );
-		$omd_template_output = ob_get_clean();
-
-		if ( $omd_template_output ) {
-			echo do_shortcode( $omd_template_output );
-		}
+		block_template_part( $menu_slug );
+		echo do_shortcode( ob_get_clean() );
 		?>
 		<button
 			aria-label="<?php echo esc_attr( __( 'Close menu', 'ollie-menu-designer' ) ); ?>"
