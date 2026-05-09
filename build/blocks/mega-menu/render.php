@@ -142,8 +142,18 @@ $allowed_html = array(
 	>
 		<?php
 		ob_start();
-		block_template_part( $menu_slug );
-		echo do_shortcode( ob_get_clean() );
+		try {
+			block_template_part( $menu_slug );
+		} catch ( \Throwable $e ) {
+			// Gracefully handle fatal errors from invalid references
+			// (e.g., wp_navigation posts that don't exist on this site).
+			ob_end_clean();
+			ob_start();
+		}
+		$omd_menu_content = ob_get_clean();
+		if ( $omd_menu_content ) {
+			echo do_shortcode( $omd_menu_content );
+		}
 		?>
 		<button
 			aria-label="<?php echo esc_attr( __( 'Close menu', 'ollie-menu-designer' ) ); ?>"
