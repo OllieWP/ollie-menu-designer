@@ -2,12 +2,15 @@
  * WordPress dependencies
  */
 import { __ } from '@wordpress/i18n';
-import { InspectorControls } from '@wordpress/block-editor';
+import { InspectorControls, useStyleOverride as _useStyleOverride } from '@wordpress/block-editor';
+
+// Fallback for WP < 6.7 where useStyleOverride doesn't exist.
+// Pre-6.7 editors aren't iframed, so document.head styles cover the canvas.
+const useStyleOverride = _useStyleOverride || function () {};
 import { PanelBody, ToggleControl, TextControl } from '@wordpress/components';
 import { createHigherOrderComponent } from '@wordpress/compose';
 import { addFilter } from '@wordpress/hooks';
-import { useEffect } from '@wordpress/element';
-import { createInterpolateElement } from '@wordpress/element';
+import { createInterpolateElement, useEffect } from '@wordpress/element';
 import { useEntityRecords } from '@wordpress/core-data';
 import { useSelect } from '@wordpress/data';
 
@@ -67,9 +70,20 @@ const withMobileMenuControls = createHigherOrderComponent( ( BlockEdit ) => {
 		} );
 
 
-		// Inject styles for mobile icon preview
+		// Resolve color attribute values to valid CSS
+		const getColorValue = ( slug, customColor ) => {
+			if ( slug ) {
+				return `var(--wp--preset--color--${ slug })`;
+			}
+			return customColor || '';
+		};
+
+		const iconBgColorValue = getColorValue( mobileIconBackgroundColor, attributes.customMobileIconBackgroundColor );
+		const iconColorValue = getColorValue( mobileIconColor, attributes.customMobileIconColor );
+
+		// Inject styles into the sidebar (outside iframe) for the overlay menu preview button
 		useEffect( () => {
-			if ( ! mobileIconBackgroundColor && ! mobileIconColor ) return;
+			if ( ! iconBgColorValue && ! iconColorValue ) return;
 
 			const styleId = 'menu-designer-mobile-icon-styles';
 			let styleElement = document.getElementById( styleId );
@@ -80,17 +94,27 @@ const withMobileMenuControls = createHigherOrderComponent( ( BlockEdit ) => {
 				document.head.appendChild( styleElement );
 			}
 
-			const styles = `
-				${ mobileIconBackgroundColor ? `.wp-block-navigation__overlay-menu-preview svg { background-color: ${mobileIconBackgroundColor} !important; }` : '' }
-				${ mobileIconColor ? `.wp-block-navigation__overlay-menu-preview svg { fill: ${mobileIconColor} !important; }` : '' }
-			`;
+			const styles = [
+				iconBgColorValue && `.wp-block-navigation__overlay-menu-preview svg { background-color: ${ iconBgColorValue } !important; }`,
+				iconColorValue && `.wp-block-navigation__overlay-menu-preview svg { fill: ${ iconColorValue } !important; }`,
+			].filter( Boolean ).join( '\n' );
 
 			styleElement.textContent = styles;
 
 			return () => {
-				// Don't remove on cleanup as other blocks might use it
+				if ( styleElement.parentNode ) {
+					styleElement.parentNode.removeChild( styleElement );
+				}
 			};
-		}, [ mobileIconBackgroundColor, mobileIconColor ] );
+		}, [ iconBgColorValue, iconColorValue ] );
+
+		// Also inject into the iframed editor canvas for the actual responsive toggle button
+		const canvasToggleCss = [
+			iconBgColorValue && `.wp-block-navigation__responsive-container-open { background-color: ${ iconBgColorValue } !important; }`,
+			iconColorValue && `.wp-block-navigation__responsive-container-open svg { fill: ${ iconColorValue } !important; }`,
+		].filter( Boolean ).join( '\n' );
+
+		useStyleOverride( canvasToggleCss ? { css: canvasToggleCss } : {} );
 
 		return (
 			<>

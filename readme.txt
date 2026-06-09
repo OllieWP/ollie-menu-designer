@@ -4,7 +4,7 @@ Donate link: https://olliewp.com
 Tags: mobile menu, dropdown menu, navigation, block, mega menu
 Requires at least: 6.5
 Tested up to: 7.0
-Stable tag: 0.2.9
+Stable tag: 0.3.0
 Requires PHP: 7.4
 License: GPLv3 or later
 License URI: https://www.gnu.org/licenses/gpl-2.0.html
@@ -140,6 +140,10 @@ While Ollie Menu Designer gives you extensive design control through blocks and 
 8. Design any style of navigation - from simple dropdowns to complex mega menus with rich content.
 
 == Changelog ==
+
+= 0.3.0 =
+* Fix mobile toggle color controls not applying in the block editor on WordPress 7.0+
+* Resolve color slugs to proper CSS values for editor preview
 
 = 0.2.9 =
 * Allow imported and uncategorized template parts to be selected as menu templates
