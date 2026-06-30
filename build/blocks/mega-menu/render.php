@@ -141,18 +141,30 @@ $allowed_html = array(
 		aria-labelledby="<?php echo esc_attr( $button_id ); ?>"
 	>
 		<?php
-		ob_start();
-		try {
-			block_template_part( $menu_slug );
-		} catch ( \Throwable $e ) {
-			// Gracefully handle fatal errors from invalid references
-			// (e.g., wp_navigation posts that don't exist on this site).
-			ob_end_clean();
+		// Recursion guard: prevent infinite loops when a template part contains
+		// navigation blocks that themselves include mega menu blocks pointing back
+		// to an ancestor slug (directly or transitively).
+		static $rendering_slugs = array();
+
+		if ( ! isset( $rendering_slugs[ $menu_slug ] ) ) {
+			$rendering_slugs[ $menu_slug ] = true;
+
 			ob_start();
-		}
-		$omd_menu_content = ob_get_clean();
-		if ( $omd_menu_content ) {
-			echo do_shortcode( $omd_menu_content );
+			try {
+				block_template_part( $menu_slug );
+			} catch ( \Throwable $e ) {
+				// Gracefully handle fatal errors from invalid references
+				// (e.g., wp_navigation posts that don't exist on this site).
+				ob_end_clean();
+				ob_start();
+			}
+			$omd_menu_content = ob_get_clean();
+
+			unset( $rendering_slugs[ $menu_slug ] );
+
+			if ( $omd_menu_content ) {
+				echo do_shortcode( $omd_menu_content );
+			}
 		}
 		?>
 		<button
