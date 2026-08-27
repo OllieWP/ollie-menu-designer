@@ -67,6 +67,11 @@
                 visibility: visible;
                 // Opening transition: immediate visibility, fast fade-in
                 transition: opacity 0.1s ease-in, visibility 0s linear 0s;
+
+                &.menu-animation-slide {
+                    transform: translateY(0);
+                    transition: opacity 0.2s ease-out, visibility 0s linear 0s, transform 0.2s ease-out;
+                }
             }
         }
     }  

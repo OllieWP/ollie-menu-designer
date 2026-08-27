@@ -22,6 +22,7 @@ import {
 	__experimentalSpacer as Spacer, // eslint-disable-line
 	__experimentalHStack as HStack, // eslint-disable-line
 	__experimentalToggleGroupControl as ToggleGroupControl, // eslint-disable-line
+	__experimentalToggleGroupControlOption as ToggleGroupControlOption, // eslint-disable-line
 	__experimentalToggleGroupControlOptionIcon as ToggleGroupControlOptionIcon, // eslint-disable-line
 } from '@wordpress/components';
 import {
@@ -67,6 +68,7 @@ export default function Edit( { attributes, setAttributes, clientId } ) {
 		width,
 		customWidth,
 		topSpacing,
+		animation,
 	} = attributes;
 
 	// State for link popovers
@@ -549,6 +551,30 @@ export default function Edit( { attributes, setAttributes, clientId } ) {
 						required
 						__next40pxDefaultSize
 					/>
+					<Spacer marginTop={ 6 } />
+					<ToggleGroupControl
+						label={ __( 'Animation', 'ollie-menu-designer' ) }
+						value={ animation || 'fade' }
+						isBlock
+						onChange={ ( animationValue ) =>
+							setAttributes( { animation: animationValue } )
+						}
+						help={ __(
+							'How the dropdown animates when it opens.',
+							'ollie-menu-designer'
+						) }
+						__nextHasNoMarginBottom
+						__next40pxDefaultSize
+					>
+						<ToggleGroupControlOption
+							value="fade"
+							label={ __( 'Fade', 'ollie-menu-designer' ) }
+						/>
+						<ToggleGroupControlOption
+							value="slide"
+							label={ __( 'Slide', 'ollie-menu-designer' ) }
+						/>
+					</ToggleGroupControl>
 				</PanelBody>
 				<PanelBody
 					className="ollie-mega-menu__link-attributes-panel"

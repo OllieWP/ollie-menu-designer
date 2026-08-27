@@ -18,6 +18,12 @@ body:has(.wp-block-ollie-mega-menu__menu-container.menu-width-full) {
 	color: initial;
     background-color: initial;
 
+    // Slide animation variant: slides down from above while fading in.
+    &.menu-animation-slide {
+        transform: translateY(-16px);
+        transition: opacity 0.15s ease-out 0.1s, visibility 0s linear 0.25s, transform 0.2s ease-out;
+    }
+
     &.menu-width-content {
         max-width: var(--wp--style--global--content-size);
         width: var(--wp--style--global--content-size);
@@ -148,5 +154,13 @@ body:has(.wp-block-ollie-mega-menu__menu-container.menu-width-full) {
 		opacity: 1;
 		overflow-x: hidden !important;
 		overflow-y: scroll !important;
+		transform: none !important;
+	}
+}
+
+// Disable the slide movement for users who prefer reduced motion (fade remains).
+@media (prefers-reduced-motion: reduce) {
+	.wp-block-ollie-mega-menu__menu-container.menu-animation-slide {
+		transform: none !important;
 	}
 }

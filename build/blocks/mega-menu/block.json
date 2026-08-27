@@ -49,6 +49,10 @@
     "topSpacing": {
       "type": "number",
       "default": 40
+    },
+    "animation": {
+      "type": "string",
+      "default": "fade"
     }
   },
   "supports": {

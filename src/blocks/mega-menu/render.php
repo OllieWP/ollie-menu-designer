@@ -27,6 +27,7 @@ $justify_menu           = esc_attr( $attributes['justifyMenu'] ?? '');
 $menu_width             = esc_attr( $attributes['width'] ?? 'content');
 $custom_width           = intval( $attributes['customWidth'] ?? 600 );
 $top_spacing            = intval( $attributes['topSpacing'] ?? 0 );
+$animation              = esc_attr( $attributes['animation'] ?? 'fade' );
 
 // Generate unique ID for ARIA attributes
 $unique_id = wp_unique_id( 'mega-menu-' );
@@ -57,6 +58,7 @@ $wrapper_attributes = get_block_wrapper_attributes(
 $menu_classes  = 'wp-block-ollie-mega-menu__menu-container';
 $menu_classes .= ' menu-width-' . $menu_width;
 $menu_classes .= $justify_menu ? ' menu-justified-' . $justify_menu : '';
+$menu_classes .= 'slide' === $animation ? ' menu-animation-slide' : '';
 
 // Icons.
 $close_icon  = '<svg width="20" height="20" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M11.5 10.3L17.6 4L16.6 3L10.5 9.2L4.4 3L3.4 4L9.5 10.3L3 17L4 18L10.5 11.4L17 18L18 17L11.5 10.3Z" fill="black"/></svg>';

@@ -142,6 +142,7 @@ While Ollie Menu Designer gives you extensive design control through blocks and 
 == Changelog ==
 
 = 0.3.2 =
+* Add animation setting to choose between fade and slide dropdown animations
 * Improve keyboard accessibility: menu items with links now render a real link plus a separate submenu toggle button, and menus no longer force-open on focus
 * Fix tall mega menus getting cut off below the viewport by adding vertical scrolling, which also fixes hover menus not closing when exiting through the bottom edge
 * Fix template preview modal getting stuck on the loading spinner
