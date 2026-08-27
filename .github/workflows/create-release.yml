@@ -4,87 +4,82 @@ on:
   push:
     branches:
       - main
+  workflow_dispatch:
+
+permissions:
+  contents: write
 
 jobs:
-  build:
+  release:
     runs-on: ubuntu-latest
     steps:
       - name: Checkout code
-        uses: actions/checkout@v3
-        with:
-          fetch-depth: 2
+        uses: actions/checkout@v4
 
-      - name: Check if version changed
+      - name: Check if this version needs a release
         id: version_check
         run: |
-          # Get current version from readme.txt
-          CURRENT_VERSION=$(grep -Po 'Stable tag: \K(.*)' readme.txt)
-          echo "Current version: $CURRENT_VERSION"
+          VERSION=$(grep -oP 'Stable tag: \K.*' readme.txt | tr -d '[:space:]')
+          echo "Version in readme.txt: $VERSION"
+          echo "version=$VERSION" >> "$GITHUB_OUTPUT"
 
-          # Get previous version from readme.txt in the previous commit
-          git checkout HEAD~1 readme.txt
-          PREVIOUS_VERSION=$(grep -Po 'Stable tag: \K(.*)' readme.txt || echo "0.0.0")
-          git checkout HEAD readme.txt
-          echo "Previous version: $PREVIOUS_VERSION"
-
-          # Compare versions
-          if [ "$CURRENT_VERSION" = "$PREVIOUS_VERSION" ]; then
-            echo "Version has not changed. Skipping release."
-            echo "VERSION_CHANGED=false" >> $GITHUB_ENV
+          if [ -z "$VERSION" ]; then
+            echo "No stable tag found in readme.txt. Skipping release."
+            echo "needs_release=false" >> "$GITHUB_OUTPUT"
+          elif git ls-remote --exit-code --tags origin "refs/tags/v$VERSION" > /dev/null 2>&1; then
+            echo "Tag v$VERSION already exists. Skipping release."
+            echo "needs_release=false" >> "$GITHUB_OUTPUT"
           else
-            echo "Version changed from $PREVIOUS_VERSION to $CURRENT_VERSION"
-            echo "VERSION_CHANGED=true" >> $GITHUB_ENV
+            echo "No release for v$VERSION yet. Creating one."
+            echo "needs_release=true" >> "$GITHUB_OUTPUT"
           fi
 
       - name: Set up Node.js
-        if: env.VERSION_CHANGED == 'true'
-        uses: actions/setup-node@v3
+        if: steps.version_check.outputs.needs_release == 'true'
+        uses: actions/setup-node@v4
         with:
-          node-version: '18'
+          node-version: '22'
+          cache: npm
 
       - name: Install dependencies
-        if: env.VERSION_CHANGED == 'true'
-        run: npm install
+        if: steps.version_check.outputs.needs_release == 'true'
+        run: npm ci
 
       - name: Build plugin
-        if: env.VERSION_CHANGED == 'true'
+        if: steps.version_check.outputs.needs_release == 'true'
         run: npm run build
 
-      - name: Extract version and changelog
-        if: env.VERSION_CHANGED == 'true'
-        id: extract_info
+      - name: Extract release notes from changelog
+        if: steps.version_check.outputs.needs_release == 'true'
+        id: changelog
         run: |
-          # Extract stable tag
-          STABLE_TAG=$(grep -Po 'Stable tag: \K(.*)' readme.txt)
-          echo "STABLE_TAG=$STABLE_TAG" >> $GITHUB_ENV
+          VERSION="${{ steps.version_check.outputs.version }}"
 
-          # Extract latest changelog entry
-          CHANGELOG_TITLE=$(grep -Po '= [0-9.]+ .*=' readme.txt | head -1)
+          # Pull the changelog entry matching this version from readme.txt
+          NOTES=$(awk -v ver="$VERSION" '
+            $0 == "= " ver " =" { found = 1; next }
+            found && /^=/ { exit }
+            found { print }
+          ' readme.txt)
 
-          # Get all bullet points under the latest changelog entry
-          CHANGELOG_START_LINE=$(grep -n "$CHANGELOG_TITLE" readme.txt | cut -d ':' -f 1)
-          NEXT_SECTION_LINE=$(tail -n +$((CHANGELOG_START_LINE+1)) readme.txt | grep -n "=" | head -1 | cut -d ':' -f 1)
+          # Trim leading/trailing blank lines
+          NOTES=$(printf '%s\n' "$NOTES" | sed -e '/[^[:space:]]/,$!d' | tac | sed -e '/[^[:space:]]/,$!d' | tac)
 
-          if [ -z "$NEXT_SECTION_LINE" ]; then
-            # If there's no next section, read until end of changelog section
-            NEXT_SECTION_LINE=$(tail -n +$((CHANGELOG_START_LINE+1)) readme.txt | grep -n "==" | head -1 | cut -d ':' -f 1)
+          if [ -z "$NOTES" ]; then
+            NOTES="See readme.txt for details."
           fi
 
-          if [ -z "$NEXT_SECTION_LINE" ]; then
-            # If still no section found, read next 20 lines
-            NEXT_SECTION_LINE=20
-          fi
+          echo "Release notes:"
+          echo "$NOTES"
 
-          CHANGELOG_CONTENT=$(tail -n +$((CHANGELOG_START_LINE+1)) readme.txt | head -n $((NEXT_SECTION_LINE-1)))
-
-          # Format the release notes
-          RELEASE_NOTES="${CHANGELOG_TITLE}\n${CHANGELOG_CONTENT}"
-          echo "RELEASE_NOTES<<EOF" >> $GITHUB_ENV
-          echo -e "$RELEASE_NOTES" >> $GITHUB_ENV
-          echo "EOF" >> $GITHUB_ENV
+          {
+            echo "notes<<NOTES_EOF"
+            echo "$NOTES"
+            echo "NOTES_EOF"
+          } >> "$GITHUB_OUTPUT"
 
       - name: Create ZIP archive
-        if: env.VERSION_CHANGED == 'true'
+        if: steps.version_check.outputs.needs_release == 'true'
         run: |
           # Create the zip file directly, excluding development files
           zip -r menu-designer.zip . \
@@ -93,8 +88,14 @@ jobs:
               -x "node_modules/*" \
               -x "src/*" \
               -x "Sites/*" \
+              -x "docs/*" \
+              -x "zip/*" \
+              -x "_playground/*" \
               -x "*.log" \
+              -x "*.map" \
               -x ".DS_Store" \
+              -x "*/.DS_Store" \
+              -x "package.json" \
               -x "package-lock.json" \
               -x "*.sh" \
               -x "CLAUDE.md" \
@@ -104,13 +105,12 @@ jobs:
               -x ".claude/*"
 
       - name: Create Release
-        if: env.VERSION_CHANGED == 'true'
-        id: create_release
-        uses: softprops/action-gh-release@v1
+        if: steps.version_check.outputs.needs_release == 'true'
+        uses: softprops/action-gh-release@v2
         with:
-          tag_name: v${{ env.STABLE_TAG }}
-          name: Menu Designer v${{ env.STABLE_TAG }}
-          body: ${{ env.RELEASE_NOTES }}
+          tag_name: v${{ steps.version_check.outputs.version }}
+          name: Menu Designer v${{ steps.version_check.outputs.version }}
+          body: ${{ steps.changelog.outputs.notes }}
           draft: false
           prerelease: false
           files: menu-designer.zip
