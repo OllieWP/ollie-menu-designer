@@ -13,6 +13,8 @@ import {
 	DEFAULT_IFRAME_HEIGHT,
 	MODAL_HEADER_OFFSET,
 	IFRAME_MEASURE_HEIGHT,
+	MAX_MEASURE_ATTEMPTS,
+	LOADING_SAFETY_TIMEOUT,
 	calculateClampValue,
 } from '../utils/template-utils';
 
@@ -52,6 +54,21 @@ export default function TemplatePreviewModal( {
 		}
 	}, [ isOpen, templateSlug ] );
 
+	// Safety net: never leave the spinner up forever. If the iframe hasn't
+	// finished loading/measuring in time (slow subresources, blocked frame,
+	// cross-origin URL), reveal it at the default height so the user can see
+	// what actually loaded instead of an endless "Loading preview…".
+	useEffect( () => {
+		if ( ! isOpen || ! isIframeLoading ) {
+			return;
+		}
+		const timer = setTimeout(
+			() => setIsIframeLoading( false ),
+			LOADING_SAFETY_TIMEOUT
+		);
+		return () => clearTimeout( timer );
+	}, [ isOpen, isIframeLoading, templateSlug ] );
+
 	/**
 	 * Measure and set iframe height based on content
 	 * CRITICAL: This function must run exactly as implemented to ensure
@@ -60,50 +77,72 @@ export default function TemplatePreviewModal( {
 	 */
 	const handleIframeLoad = ( event ) => {
 		const iframe = event.target;
+		let attempts = 0;
 
 		const measureHeight = () => {
-			const iframeDoc = iframe.contentDocument;
+			let iframeDoc = null;
+			try {
+				iframeDoc = iframe.contentDocument;
+			} catch ( e ) {
+				iframeDoc = null;
+			}
 
-			// Wait for document to be ready
-			if ( iframeDoc?.readyState !== 'complete' ) {
+			// Cross-origin or blocked frame: the document can't be read, so
+			// it can't be measured. Reveal the iframe at the default height.
+			if ( ! iframeDoc ) {
+				setIsIframeLoading( false );
+				return;
+			}
+
+			// Wait for document to be ready, but don't retry forever.
+			if ( iframeDoc.readyState !== 'complete' ) {
+				attempts++;
+				if ( attempts > MAX_MEASURE_ATTEMPTS ) {
+					setIsIframeLoading( false );
+					return;
+				}
 				setTimeout( measureHeight, 50 );
 				return;
 			}
 
-			// Temporarily expand iframe to measure content
-			iframe.style.height = IFRAME_MEASURE_HEIGHT;
+			try {
+				// Temporarily expand iframe to measure content
+				iframe.style.height = IFRAME_MEASURE_HEIGHT;
 
-			// Force reflow
-			iframeDoc.body.offsetHeight; // eslint-disable-line no-unused-expressions
+				// Force reflow
+				iframeDoc.body.offsetHeight; // eslint-disable-line no-unused-expressions
 
-			// Measure content height
-			const wrapper = iframeDoc.querySelector( PREVIEW_WRAPPER_CLASS );
-			const contentHeight = wrapper
-				? wrapper.getBoundingClientRect().height
-				: Math.max(
-					iframeDoc.body.scrollHeight,
-					iframeDoc.body.offsetHeight,
-					iframeDoc.body.clientHeight
-				);
+				// Measure content height
+				const wrapper = iframeDoc.querySelector( PREVIEW_WRAPPER_CLASS );
+				const contentHeight = wrapper
+					? wrapper.getBoundingClientRect().height
+					: Math.max(
+						iframeDoc.body.scrollHeight,
+						iframeDoc.body.offsetHeight,
+						iframeDoc.body.clientHeight
+					);
 
-			// Reset iframe height
-			iframe.style.height = '100%';
+				// Reset iframe height
+				iframe.style.height = '100%';
 
-			// Calculate final height
-			let finalHeight = contentHeight;
+				// Calculate final height
+				let finalHeight = contentHeight;
 
-			// Add padding if background color is present
-			if ( backgroundColor ) {
-				const padding = calculateClampValue( 1.5, 2, 0.04 );
-				finalHeight += padding * 2; // Top and bottom
+				// Add padding if background color is present
+				if ( backgroundColor ) {
+					const padding = calculateClampValue( 1.5, 2, 0.04 );
+					finalHeight += padding * 2; // Top and bottom
+				}
+
+				// Apply viewport constraints
+				const maxHeight = window.innerHeight - MODAL_HEADER_OFFSET;
+				finalHeight = Math.min( finalHeight, maxHeight );
+
+				setIframeHeight( `${ finalHeight }px` );
+			} finally {
+				// Whatever happened during measurement, show the iframe.
+				setIsIframeLoading( false );
 			}
-
-			// Apply viewport constraints
-			const maxHeight = window.innerHeight - MODAL_HEADER_OFFSET;
-			finalHeight = Math.min( finalHeight, maxHeight );
-
-			setIframeHeight( `${ finalHeight }px` );
-			setIsIframeLoading( false );
 		};
 
 		measureHeight();

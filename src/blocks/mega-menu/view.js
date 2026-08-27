@@ -26,6 +26,8 @@ const CONFIG = {
 		MIN_WIDTH: 200, // px - Minimum width for menus
 		MIN_WIDTH_BEFORE_ANCHOR: 400, // px - Minimum width before switching to anchoring
 		VIEWPORT_OFFSET: 120, // px - Space reserved for modal header
+		BOTTOM_GAP: 24, // px - Gap kept between menu bottom and viewport edge
+		MIN_HEIGHT: 100, // px - Minimum constrained height for tall menus
 		MOBILE_BG_OPACITY: 1, // Opacity for mobile background color
 		DEFAULT_BG_FALLBACK: 'rgba(255, 255, 255, 1)', // Fallback mobile background
 	},
@@ -181,6 +183,26 @@ const { state, actions } = store( 'ollie/mega-menu', {
 				menu.style.top = '';
 			}
 		},
+		// Constrain the menu to the visible viewport so tall menus scroll
+		// instead of getting cut off below the fold. Also keeps the menu's
+		// bottom edge reachable so mouseleave can fire and close the menu.
+		applyMaxHeight( menu ) {
+			if ( state.isDesktop ) {
+				const availableHeight =
+					window.innerHeight -
+					menu.getBoundingClientRect().top -
+					CONFIG.MENU.BOTTOM_GAP;
+				menu.style.maxHeight = `${ Math.max(
+					availableHeight,
+					CONFIG.MENU.MIN_HEIGHT
+				) }px`;
+				menu.style.overflowY = 'auto';
+			} else {
+				// The mobile modal manages its own height/overflow.
+				menu.style.maxHeight = '';
+				menu.style.overflowY = '';
+			}
+		},
 		// Apply appropriate width to menu based on its type
 		applyMenuWidth( menu ) {
 			if ( menuUtils.hasWidthClass( menu, 'custom' ) ) {
@@ -256,6 +278,7 @@ const { state, actions } = store( 'ollie/mega-menu', {
 			menu.style.left = '';
 			menu.style.width = '';
 			menu.style.maxWidth = '';
+			menu.style.maxHeight = '';
 		},
 		// Adjust a single dropdown menu
 		adjustMegaMenu() {
@@ -270,6 +293,7 @@ const { state, actions } = store( 'ollie/mega-menu', {
 			actions.applyTopSpacing( menu );
 			actions.applyMobileBackgroundColor( menu );
 			actions.applyMenuWidth( menu );
+			actions.applyMaxHeight( menu );
 
 			// Determine justification
 			const justification = actions.determineJustification(
@@ -484,15 +508,6 @@ const { state, actions } = store( 'ollie/mega-menu', {
 			// Safari fix: Set flag to prevent focusout from interfering with click handling
 			state.isProcessingClick = true;
 
-			// On mobile, always toggle the menu even if it's a link with hover enabled
-			// On desktop with hover enabled and URL, allow default link behavior
-			if ( context.showOnHover && context.url && state.isDesktop ) {
-				// Let the link navigate on desktop when hover is enabled with URL
-				state.isProcessingClick = false;
-				return;
-			}
-
-			// Prevent default link navigation on mobile or when no URL
 			if ( event && event.preventDefault ) {
 				event.preventDefault();
 			}
@@ -506,13 +521,12 @@ const { state, actions } = store( 'ollie/mega-menu', {
 				currentClickMenu.menuOpenedBy.focus = false;
 			}
 
-			// Only check click state for toggling (focus state is for keyboard nav)
-			if ( state.menuOpenedBy.click ) {
-				actions.closeMenu( 'click' );
-				actions.closeMenu( 'focus' );
+			// Toggle based on overall open state so a hover-opened menu
+			// closes on click too, and clear every origin when closing.
+			if ( state.isMenuOpen ) {
+				actions.clearHoverTimeout();
+				actions.closeAllMenus();
 			} else {
-				// Close focus state and open by click
-				actions.closeMenu( 'focus' );
 				context.previousFocus = ref;
 				actions.openMenu( 'click' );
 				// Track this as the current click menu
@@ -526,8 +540,8 @@ const { state, actions } = store( 'ollie/mega-menu', {
 			}, 100 );
 		} ),
 		closeMenuOnClick() {
-			actions.closeMenu( 'click' );
-			actions.closeMenu( 'focus' );
+			actions.clearHoverTimeout();
+			actions.closeAllMenus();
 		},
 
 		// ========== HOVER FUNCTIONALITY ==========
@@ -547,9 +561,16 @@ const { state, actions } = store( 'ollie/mega-menu', {
 			const context = getContext();
 			return context.showOnHover && state.isDesktop;
 		},
-		// Handle mouse enter on toggle button
+		// Handle mouse enter anywhere on the menu item (link, toggle, or
+		// the open menu container — all live inside the same <li>)
 		handleMouseEnter() {
 			if ( ! actions.shouldActivateHover() ) return;
+
+			// Already open: just cancel any pending close.
+			if ( state.menuOpenedBy.hover ) {
+				actions.clearHoverTimeout();
+				return;
+			}
 
 			actions.setHoverTimeout( () => {
 				if ( ! state.menuOpenedBy.click ) {
@@ -564,7 +585,7 @@ const { state, actions } = store( 'ollie/mega-menu', {
 				}
 			}, CONFIG.HOVER.OPEN_DELAY );
 		},
-		// Handle mouse leave from toggle button
+		// Handle mouse leave from the menu item
 		handleMouseLeave() {
 			if ( ! actions.shouldActivateHover() ) return;
 
@@ -572,45 +593,12 @@ const { state, actions } = store( 'ollie/mega-menu', {
 				actions.closeMenu( 'hover' );
 			}, state.dynamicHoverDelay ); // Use dynamic delay based on top spacing
 		},
-		// Handle mouse enter on menu container
-		handleMenuMouseEnter() {
-			if ( ! actions.shouldActivateHover() ) return;
-
-			// Clear any close timeout to keep menu open
-			actions.clearHoverTimeout();
-		},
-		// Handle mouse leave from menu container
-		handleMenuMouseLeave() {
-			if ( ! actions.shouldActivateHover() ) return;
-
-			actions.setHoverTimeout( () => {
-				actions.closeMenu( 'hover' );
-			}, CONFIG.HOVER.CLOSE_DELAY ); // Use base delay when leaving menu
-		},
 		// ========== END HOVER FUNCTIONALITY ==========
-
-		openMenuOnFocus() {
-			// Only open if not already open
-			if ( state.isMenuOpen ) {
-				return;
-			}
-
-			// Only open on focus for desktop (keyboard navigation)
-			// On mobile, require explicit click to open
-			if ( ! state.isDesktop ) {
-				return;
-			}
-
-			// Open menu for keyboard accessibility
-			actions.openMenu( 'focus' );
-		},
 		handleMenuKeydown( event ) {
-			if ( state.menuOpenedBy.click || state.menuOpenedBy.focus ) {
-				// If Escape close the menu.
-				if ( event?.key === 'Escape' ) {
-					actions.closeMenu( 'click' );
-					actions.closeMenu( 'focus' );
-				}
+			// Escape closes the menu no matter how it was opened.
+			if ( state.isMenuOpen && event?.key === 'Escape' ) {
+				actions.clearHoverTimeout();
+				actions.closeAllMenus();
 			}
 		},
 		handleMenuFocusout( event ) {
@@ -716,6 +704,9 @@ const { state, actions } = store( 'ollie/mega-menu', {
 				const menu = menuUtils.getMenu( ref );
 				if ( menu ) {
 					actions.applyMobileBackgroundColor( menu );
+					// Recompute the height constraint at open time, since the
+					// menu's viewport position depends on the current scroll.
+					actions.applyMaxHeight( menu );
 				}
 			}
 		},

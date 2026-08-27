@@ -8,6 +8,8 @@ export const DEFAULT_IFRAME_HEIGHT = '600px';
 export const MODAL_HEADER_OFFSET = 120;
 export const IFRAME_MEASURE_HEIGHT = '2000px';
 export const REM_TO_PX = 16;
+export const MAX_MEASURE_ATTEMPTS = 60; // ~3s of 50ms readyState polls
+export const LOADING_SAFETY_TIMEOUT = 10000; // ms - Reveal iframe even if load never fires
 
 /**
  * Calculate CSS clamp() value in pixels

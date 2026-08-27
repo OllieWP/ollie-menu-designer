@@ -4,7 +4,7 @@ Donate link: https://olliewp.com
 Tags: mobile menu, dropdown menu, navigation, block, mega menu
 Requires at least: 6.5
 Tested up to: 7.0
-Stable tag: 0.3.1
+Stable tag: 0.3.2
 Requires PHP: 7.4
 License: GPLv3 or later
 License URI: https://www.gnu.org/licenses/gpl-2.0.html
@@ -140,6 +140,11 @@ While Ollie Menu Designer gives you extensive design control through blocks and 
 8. Design any style of navigation - from simple dropdowns to complex mega menus with rich content.
 
 == Changelog ==
+
+= 0.3.2 =
+* Improve keyboard accessibility: menu items with links now render a real link plus a separate submenu toggle button, and menus no longer force-open on focus
+* Fix tall mega menus getting cut off below the viewport by adding vertical scrolling, which also fixes hover menus not closing when exiting through the bottom edge
+* Fix template preview modal getting stuck on the loading spinner
 
 = 0.3.1 =
 * Fix memory exhaustion caused by recursive mega menu block rendering

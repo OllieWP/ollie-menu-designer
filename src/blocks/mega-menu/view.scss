@@ -130,7 +130,8 @@ body:has(.wp-block-ollie-mega-menu__menu-container.menu-width-full) {
                 display: inherit;
             }
     
-            .wp-block-ollie-mega-menu__toggle, 
+            .wp-block-ollie-mega-menu__toggle,
+            .wp-block-ollie-mega-menu__link,
             .wp-block-ollie-mega-menu__menu-container {
                 display: none;
             }
