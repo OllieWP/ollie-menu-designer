@@ -128,17 +128,37 @@ function add_nav_attributes( $processor, $menu_attrs, $has_mobile_menu ) {
  * @return string Modified content.
  */
 function inject_mobile_menu_content( $content, $mobile_menu_slug ) {
+	// Recursion guard: prevent infinite loops when a mobile menu template
+	// part contains a navigation block whose mobileMenuSlug points back to
+	// a template part already being rendered (directly or transitively).
+	static $rendering_slugs = array();
+
+	if ( isset( $rendering_slugs[ $mobile_menu_slug ] ) ) {
+		return $content;
+	}
+
 	$responsive_container_pattern = '/<div[^>]*class="[^"]*wp-block-navigation__responsive-container-content[^"]*"[^>]*id="[^"]*-content"[^>]*>/';
-	
+
 	if ( ! preg_match( $responsive_container_pattern, $content ) ) {
 		return $content;
 	}
 
+	$rendering_slugs[ $mobile_menu_slug ] = true;
+
 	// Render the mobile menu template part
 	ob_start();
-	block_template_part( $mobile_menu_slug );
+	try {
+		block_template_part( $mobile_menu_slug );
+	} catch ( \Throwable $e ) {
+		// Gracefully handle fatal errors from invalid references
+		// (e.g., wp_navigation posts that don't exist on this site).
+		ob_end_clean();
+		ob_start();
+	}
 	$mobile_menu_content = do_shortcode( ob_get_clean() );
-	
+
+	unset( $rendering_slugs[ $mobile_menu_slug ] );
+
 	if ( empty( $mobile_menu_content ) ) {
 		return $content;
 	}
