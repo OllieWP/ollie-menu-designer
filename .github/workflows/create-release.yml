@@ -39,11 +39,10 @@ jobs:
         uses: actions/setup-node@v4
         with:
           node-version: '22'
-          cache: npm
 
       - name: Install dependencies
         if: steps.version_check.outputs.needs_release == 'true'
-        run: npm ci
+        run: npm install
 
       - name: Build plugin
         if: steps.version_check.outputs.needs_release == 'true'
