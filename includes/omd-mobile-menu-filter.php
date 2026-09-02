@@ -169,9 +169,15 @@ function inject_mobile_menu_content( $content, $mobile_menu_slug ) {
 		$mobile_menu_content
 	);
 	
-	return preg_replace(
+	// preg_replace_callback, not preg_replace: the rendered template markup
+	// must never be scanned for backreferences, or naturally occurring
+	// $0/$1/\1 sequences (prices, encoded URLs, inline JS) get expanded
+	// into fragments of the matched container div.
+	return preg_replace_callback(
 		$responsive_container_pattern,
-		'$0' . $mobile_menu_html,
+		static function ( $matches ) use ( $mobile_menu_html ) {
+			return $matches[0] . $mobile_menu_html;
+		},
 		$content,
 		1
 	);
