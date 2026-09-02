@@ -4,7 +4,7 @@ Donate link: https://olliewp.com
 Tags: mobile menu, dropdown menu, navigation, block, mega menu
 Requires at least: 6.5
 Tested up to: 7.1
-Stable tag: 0.3.3
+Stable tag: 0.3.4
 Requires PHP: 7.4
 License: GPLv3 or later
 License URI: https://www.gnu.org/licenses/gpl-2.0.html
@@ -140,6 +140,9 @@ While Ollie Menu Designer gives you extensive design control through blocks and 
 8. Design any style of navigation - from simple dropdowns to complex mega menus with rich content.
 
 == Changelog ==
+
+= 0.3.4 =
+* Fix mobile menu markup corruption when template content contains dollar-digit sequences such as prices or encoded URLs
 
 = 0.3.3 =
 * Fix chevron icons rendering at the wrong size by allowing the SVG viewBox attribute through sanitization
