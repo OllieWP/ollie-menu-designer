@@ -39,10 +39,10 @@
             display: inline-block;
             font-size: inherit;
             height: 0.6em;
-            line-height: 0;	
-            margin-left: 0.25em;
+            line-height: 0;
+            margin-left: 0.35em;
             padding: 0;
-            width: 0.8em;
+            width: 0.6em;
 
             svg {
                 stroke: currentColor;
@@ -78,6 +78,9 @@
 }
 
 .wp-block-navigation:has(.wp-block-ollie-mega-menu) .wp-block-navigation__submenu-icon {
+	// Match the mega menu toggle's text-to-chevron gap so mixed menus align.
+	margin-left: 0.35em;
+
 	svg {
 		transition: all .125s linear;
 	}

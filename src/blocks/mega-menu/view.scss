@@ -156,6 +156,70 @@ body:has(.wp-block-ollie-mega-menu__menu-container.menu-width-full) {
 		overflow-y: scroll !important;
 		transform: none !important;
 	}
+
+	// When a link is set, the chevron renders as a standalone button after the
+	// full-width link, which wraps it to its own line. Overlay it on the link
+	// row instead, matching the Navigation block's submenu icon treatment.
+	.wp-block-ollie-mega-menu:has(.wp-block-ollie-mega-menu__submenu-toggle) {
+		position: relative;
+	}
+
+	.wp-block-ollie-mega-menu__submenu-toggle {
+		justify-content: center;
+		margin: 0;
+		padding: 15px 0;
+		position: absolute;
+		right: 0;
+		top: 5px;
+		width: 60px;
+		z-index: 10;
+
+		// Reset the desktop icon box (0.6em + margin) so the glyph centers
+		// exactly in the 60px zone like the toggle-only variant.
+		.wp-block-ollie-mega-menu__toggle-icon {
+			margin: 0;
+			width: auto;
+		}
+	}
+
+	// Match the core Navigation submenu icon size inside the overlay, where
+	// themes typically bump the chevrons up for touch targets.
+	.wp-block-ollie-mega-menu .wp-block-ollie-mega-menu__toggle-icon {
+		height: auto;
+
+		svg {
+			height: 16px;
+			margin: 0;
+			width: 16px;
+		}
+	}
+
+	// Toggle-only variant (no link set): the chevron span sits inline after
+	// the label inside the full-width button. Pin it to the right edge so it
+	// lines up with the standalone toggles above.
+	.wp-block-ollie-mega-menu__toggle.wp-block-navigation-item__content {
+		position: relative;
+
+		.wp-block-ollie-mega-menu__toggle-icon {
+			display: inline-flex;
+			justify-content: center;
+			margin: 0;
+			position: absolute;
+			right: 0;
+			top: 50%;
+			transform: translateY(-50%);
+			width: 60px;
+		}
+	}
+}
+
+// In navs that contain a mega menu, center core submenu chevrons in their
+// overlay hit zone so every chevron column-aligns with the mega menu toggles.
+.wp-block-navigation:has(.wp-block-ollie-mega-menu) .wp-block-navigation__responsive-container.is-menu-open .wp-block-navigation__responsive-container-content .wp-block-navigation__submenu-icon {
+	align-items: center;
+	display: flex;
+	justify-content: center;
+	margin: 0;
 }
 
 // Disable the slide movement for users who prefer reduced motion (fade remains).

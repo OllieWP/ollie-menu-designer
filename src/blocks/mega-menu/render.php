@@ -73,7 +73,9 @@ $allowed_html = array(
 	),
 	'svg' => array(
 		'xmlns' => true,
-		'viewBox' => true,
+		// Kses lowercases attribute names before matching, so this key must
+		// be all-lowercase for the viewBox attribute to survive.
+		'viewbox' => true,
 		'width' => true,
 		'height' => true,
 		'aria-hidden' => true,

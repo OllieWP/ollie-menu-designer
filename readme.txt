@@ -3,8 +3,8 @@ Contributors: mmcalister, patrickposner
 Donate link: https://olliewp.com
 Tags: mobile menu, dropdown menu, navigation, block, mega menu
 Requires at least: 6.5
-Tested up to: 7.0
-Stable tag: 0.3.2
+Tested up to: 7.1
+Stable tag: 0.3.3
 Requires PHP: 7.4
 License: GPLv3 or later
 License URI: https://www.gnu.org/licenses/gpl-2.0.html
@@ -140,6 +140,11 @@ While Ollie Menu Designer gives you extensive design control through blocks and 
 8. Design any style of navigation - from simple dropdowns to complex mega menus with rich content.
 
 == Changelog ==
+
+= 0.3.3 =
+* Fix chevron icons rendering at the wrong size by allowing the SVG viewBox attribute through sanitization
+* Align mega menu chevrons with core dropdown chevrons on desktop and in the mobile overlay, for both linked and unlinked menu items
+* Always open mega menus on click on touch devices — hover opening now requires a device that supports hover
 
 = 0.3.2 =
 * Add animation setting to choose between fade and slide dropdown animations

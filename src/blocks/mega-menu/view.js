@@ -559,7 +559,23 @@ const { state, actions } = store( 'ollie/mega-menu', {
 		// Check if hover should be active
 		shouldActivateHover() {
 			const context = getContext();
-			return context.showOnHover && state.isDesktop;
+			if ( ! context.showOnHover || ! state.isDesktop ) {
+				return false;
+			}
+
+			// Touch devices fire synthetic mouseenter on tap, so only allow
+			// hover when the primary input actually supports hovering.
+			if ( ! window.matchMedia( '(hover: hover)' ).matches ) {
+				return false;
+			}
+
+			// Never open on hover inside the mobile overlay, regardless of
+			// viewport width — the overlay is click/tap-driven.
+			const { ref } = getElement();
+			const responsiveContainer = ref.closest(
+				CONFIG.CLASSES.RESPONSIVE_CONTAINER
+			);
+			return ! responsiveContainer?.classList.contains( 'is-menu-open' );
 		},
 		// Handle mouse enter anywhere on the menu item (link, toggle, or
 		// the open menu container — all live inside the same <li>)
