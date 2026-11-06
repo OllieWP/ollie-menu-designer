@@ -71,9 +71,9 @@ export default function Edit( { attributes, setAttributes, clientId } ) {
 		animation,
 	} = attributes;
 
-	// State for link popovers
-	const [ isLinkPopoverOpen, setIsLinkPopoverOpen ] = useState( false );
-	const [ isHoverLinkPopoverOpen, setIsHoverLinkPopoverOpen ] = useState( false );
+	// Keep the opening buttons as anchors when focus moves into the popovers.
+	const [ fallbackLinkAnchor, setFallbackLinkAnchor ] = useState( null );
+	const [ hoverLinkAnchor, setHoverLinkAnchor ] = useState( null );
 
 	// Get the layout settings.
 	const layout = useSelect(
@@ -211,8 +211,8 @@ export default function Edit( { attributes, setAttributes, clientId } ) {
 									<div className="block-editor-url-popover__link-viewer">
 										<Button
 											variant="secondary"
-											onClick={ () =>
-												setIsHoverLinkPopoverOpen( true )
+											onClick={ ( event ) =>
+												setHoverLinkAnchor( event.currentTarget )
 											}
 											style={ {
 												maxWidth: '100%',
@@ -241,8 +241,8 @@ export default function Edit( { attributes, setAttributes, clientId } ) {
 								) : (
 									<Button
 										variant="secondary"
-										onClick={ () =>
-											setIsHoverLinkPopoverOpen( true )
+										onClick={ ( event ) =>
+											setHoverLinkAnchor( event.currentTarget )
 										}
 									>
 										{ __(
@@ -251,14 +251,14 @@ export default function Edit( { attributes, setAttributes, clientId } ) {
 										) }
 									</Button>
 								) }
-								{ isHoverLinkPopoverOpen && (
+								{ hoverLinkAnchor && (
 									<Popover
 										position="bottom left"
 										onClose={ () =>
-											setIsHoverLinkPopoverOpen( false )
+											setHoverLinkAnchor( null )
 										}
 										focusOnMount="firstElement"
-										anchor={ document.activeElement }
+										anchor={ hoverLinkAnchor }
 										aria-label={
 											url
 												? __(
@@ -283,17 +283,13 @@ export default function Edit( { attributes, setAttributes, clientId } ) {
 														linkValue?.url ||
 														'',
 												} );
-												setIsHoverLinkPopoverOpen(
-													false
-												);
+												setHoverLinkAnchor( null );
 											} }
 											onRemove={ () => {
 												setAttributes( {
 													url: '',
 												} );
-												setIsHoverLinkPopoverOpen(
-													false
-												);
+												setHoverLinkAnchor( null );
 											} }
 											showInitialSuggestions={ true }
 											withCreateSuggestion={ false }
@@ -337,8 +333,8 @@ export default function Edit( { attributes, setAttributes, clientId } ) {
 										<div className="block-editor-url-popover__link-viewer">
 											<Button
 												variant="secondary"
-												onClick={ () =>
-													setIsLinkPopoverOpen( true )
+												onClick={ ( event ) =>
+													setFallbackLinkAnchor( event.currentTarget )
 												}
 												style={ {
 													maxWidth: '100%',
@@ -367,8 +363,8 @@ export default function Edit( { attributes, setAttributes, clientId } ) {
 									) : (
 										<Button
 											variant="secondary"
-											onClick={ () =>
-												setIsLinkPopoverOpen( true )
+											onClick={ ( event ) =>
+												setFallbackLinkAnchor( event.currentTarget )
 											}
 										>
 											{ __(
@@ -377,14 +373,14 @@ export default function Edit( { attributes, setAttributes, clientId } ) {
 											) }
 										</Button>
 									) }
-									{ isLinkPopoverOpen && (
+									{ fallbackLinkAnchor && (
 										<Popover
 											position="bottom left"
 											onClose={ () =>
-												setIsLinkPopoverOpen( false )
+												setFallbackLinkAnchor( null )
 											}
 											focusOnMount="firstElement"
-											anchor={ document.activeElement }
+											anchor={ fallbackLinkAnchor }
 											aria-label={
 												collapsedUrl
 													? __(
@@ -409,17 +405,13 @@ export default function Edit( { attributes, setAttributes, clientId } ) {
 															linkValue?.url ||
 															'',
 													} );
-													setIsLinkPopoverOpen(
-														false
-													);
+													setFallbackLinkAnchor( null );
 												} }
 												onRemove={ () => {
 													setAttributes( {
 														collapsedUrl: '',
 													} );
-													setIsLinkPopoverOpen(
-														false
-													);
+													setFallbackLinkAnchor( null );
 												} }
 												showInitialSuggestions={ true }
 												withCreateSuggestion={ false }
